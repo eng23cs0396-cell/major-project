@@ -1,0 +1,38 @@
+# Dataset (20 GB medical imaging data - excluded from GitHub)
+dataset(topAneu)/
+dataset*/
+*.nii
+*.nii.gz
+*.dcm
+
+# Python & Virtual Environments
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+
+# Model Weights & Checkpoints
+*.pt
+*.pth
+*.onnx
+*.bin
+checkpoints/
+weights/
+
+# IDE & OS
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Logs & Experiment Tracking
+runs/
+wandb/
+*.log
