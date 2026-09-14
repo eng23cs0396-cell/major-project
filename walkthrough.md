@@ -14,7 +14,7 @@
   - `scipy`, `pandas`, `matplotlib`, `seaborn`, `pyyaml`, `tqdm`, `pytest`
 
 ### 2. Environment Verification
-Executed [`tests/test_environment.py`](../tests/test_environment.py):
+Executed [`tests/test_environment.py`](tests/test_environment.py):
 ```text
 ============================================================
 RUNNING ENVIRONMENT VERIFICATION SUITE
@@ -38,7 +38,7 @@ RUNNING ENVIRONMENT VERIFICATION SUITE
 ## 📊 Phase 2: Data Pipeline, Splitting & Lesion Size Profiling
 
 ### 1. Patient-Stratified Data Splitting (Zero Data Leakage)
-Created [`src/data/splitter.py`](../src/data/splitter.py) to parse all 416 scans and partition unique patients across centers, modalities, and disease states without any longitudinal scan leakage:
+Created [`src/data/splitter.py`](src/data/splitter.py) to parse all 416 scans and partition unique patients across centers, modalities, and disease states without any longitudinal scan leakage:
 
 | Split | Total Scans | TOF-MRA | CTA | Aneurysm Positive | Healthy Controls | Total Aneurysms |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
@@ -48,15 +48,15 @@ Created [`src/data/splitter.py`](../src/data/splitter.py) to parse all 416 scans
 | **TOTAL** | **416** | **307** | **109** | **305** | **111** | **387** |
 
 Generated Split Files:
-* [`configs/train_split.csv`](../configs/train_split.csv)
-* [`configs/val_split.csv`](../configs/val_split.csv)
-* [`configs/test_split.csv`](../configs/test_split.csv)
-* [`configs/center4_holdout_split.csv`](../configs/center4_holdout_split.csv) *(For cross-hospital zero-shot generalization testing on Japan Center-4 CTA scans)*
+* [`configs/train_split.csv`](configs/train_split.csv)
+* [`configs/val_split.csv`](configs/val_split.csv)
+* [`configs/test_split.csv`](configs/test_split.csv)
+* [`configs/center4_holdout_split.csv`](configs/center4_holdout_split.csv) *(For cross-hospital zero-shot generalization testing on Japan Center-4 CTA scans)*
 
 ---
 
 ### 2. Exploratory Data Analysis & Physical Size Profiler
-Built [`src/data/eda_profiler.py`](../src/data/eda_profiler.py) to extract exact physical dimensions ($D_{\text{max}}$ in mm and volume in $\text{mm}^3$) for all 387 ground-truth aneurysms using NIfTI voxel spacing:
+Built [`src/data/eda_profiler.py`](src/data/eda_profiler.py) to extract exact physical dimensions ($D_{\text{max}}$ in mm and volume in $\text{mm}^3$) for all 387 ground-truth aneurysms using NIfTI voxel spacing:
 
 #### Size Stratification Findings:
 * **Small & Very Small Aneurysms ($\le 5.0\text{ mm}$)**: **159 cases (41.1% of the dataset)** — directly corroborating the Review 0 research focus!
@@ -65,33 +65,33 @@ Built [`src/data/eda_profiler.py`](../src/data/eda_profiler.py) to extract exact
 * **Medium ($5.0 - 10.0\text{ mm}$)**: 160 lesions (41.3%)
 * **Large ($> 10.0\text{ mm}$)**: 68 lesions (17.6%)
 
-The full metadata table is saved at [`artifacts/eda/aneurysm_annotations_summary.csv`](eda/aneurysm_annotations_summary.csv).
+The full metadata table is saved at [`artifacts/eda/aneurysm_annotations_summary.csv`](artifacts/eda/aneurysm_annotations_summary.csv).
 
 #### Generated Visualizations:
-![Aneurysm Maximum Physical Diameter Distribution](eda/size_distribution.png)
+![Aneurysm Maximum Physical Diameter Distribution](artifacts/eda/size_distribution.png)
 *Figure 1: Maximum physical 3D diameter histogram highlighting the small (<3mm) and medium (<5mm) cutoffs.*
 
-![Aneurysm Sizes Across Centers and Modalities](eda/modality_center_size_distribution.png)
+![Aneurysm Sizes Across Centers and Modalities](artifacts/eda/modality_center_size_distribution.png)
 *Figure 2: Distribution of aneurysm sizes across MRA and CTA modalities across the 4 clinical centers.*
 
-![Top Anatomical Aneurysm Sites by Size Category](eda/top_anatomical_locations.png)
+![Top Anatomical Aneurysm Sites by Size Category](artifacts/eda/top_anatomical_locations.png)
 *Figure 3: Top 10 anatomical arterial locations showing frequent sites for small lesions (e.g., ACom complex, MCA M1-M2 junction, and ICA terminus).*
 
 ---
 
 ### 3. Volumetric Preprocessor & 3D Patch Dataset
-* **[`src/data/preprocessor.py`](../src/data/preprocessor.py)**:
+* **[`src/data/preprocessor.py`](src/data/preprocessor.py)**:
   * **Modality-Specific Normalization**:
     * **TOF-MRA**: Non-zero brain parenchyma percentile clipping (0.5% – 99.5%) + Z-score standardization.
     * **CTA**: Vascular Hounsfield Unit windowing $[100, 700]$ HU mapped to $[0, 1]$.
   * **3D VOI Patch Extraction**: Symmetric boundary edge padding ensuring uniform $(64, 64, 64)$ patches with 3D coordinate jittering for augmentation.
-* **[`src/data/dataset.py`](../src/data/dataset.py)**:
+* **[`src/data/dataset.py`](src/data/dataset.py)**:
   * PyTorch `AneurysmPatchDataset` providing balanced sampling between positive aneurysm sites and negative normal vessel bifurcation locations.
 
 ---
 
 ### 4. Automated Verification Suite
-Executed [`tests/test_data_pipeline.py`](../tests/test_data_pipeline.py):
+Executed [`tests/test_data_pipeline.py`](tests/test_data_pipeline.py):
 ```text
 ============================================================
 RUNNING DATA PIPELINE UNIT TESTS
