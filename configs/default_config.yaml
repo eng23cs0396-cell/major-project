@@ -1,0 +1,88 @@
+# ==============================================================================
+# Topology-Aware Small Intracranial Aneurysm Detection Configuration
+# ==============================================================================
+
+project:
+  name: "topology-aware-aneurysm-detection"
+  version: "1.0.0"
+  random_seed: 42
+  device: "cuda"
+
+data:
+  dataset_root: "dataset(topAneu)"
+  images_dir: "dataset(topAneu)/images"
+  vessel_masks_dir: "dataset(topAneu)/vessel_masks"
+  location_masks_dir: "dataset(topAneu)/location_masks"
+  location_jsons_dir: "dataset(topAneu)/location_jsons"
+  
+  # 3D Patch & Volumetric Sampling
+  patch_size: [64, 64, 64]
+  target_spacing: [0.5, 0.5, 0.5] # mm isotropic
+  intensity_normalization:
+    mra:
+      lower_percentile: 0.5
+      upper_percentile: 99.5
+    cta:
+      window_min: 100 # HU
+      window_max: 700 # HU
+
+  # Dataset Splitting
+  split:
+    strategy: "patient_stratified" # options: "patient_stratified", "center_holdout"
+    train_ratio: 0.70
+    val_ratio: 0.15
+    test_ratio: 0.15
+    center_holdout: "center4" # for cross-center evaluation
+
+topology:
+  skeleton_algorithm: "medial_axis" # options: "medial_axis", "lee_3d"
+  pruning_threshold: 3 # remove branches shorter than 3 voxels
+  node_features:
+    include_coordinates: true
+    include_radius: true
+    include_tortuosity: true
+    include_vessel_type: true
+  subgraph:
+    k_hops: 3
+    max_nodes: 64
+
+model:
+  # Branch A: 3D CNN Volumetric Encoder
+  cnn:
+    backbone: "resnet18_3d" # options: "resnet18_3d", "resnet34_3d"
+    in_channels: 1
+    embedding_dim: 256
+    dropout: 0.2
+
+  # Branch B: Graph Attention Network
+  gat:
+    in_channels: 8 # node feature dim
+    hidden_channels: 64
+    out_channels: 128
+    num_layers: 3
+    num_heads: 4
+    edge_dim: 4 # edge length, curvature, direction vector
+    dropout: 0.2
+
+  # Multimodal Fusion
+  fusion:
+    method: "cross_attention" # options: "concatenation", "cross_attention", "gated_bilinear"
+    fused_dim: 256
+    num_classes: 2 # Aneurysm vs Normal
+
+training:
+  batch_size: 4
+  num_workers: 4
+  learning_rate: 1.0e-4
+  weight_decay: 1.0e-5
+  epochs: 50
+  mixed_precision: true # torch.cuda.amp for RTX 4060
+  early_stopping_patience: 10
+  class_weights: [1.0, 3.0] # counter class imbalance
+
+evaluation:
+  froc_fp_thresholds: [0.5, 1.0, 2.0, 4.0]
+  size_thresholds:
+    small: 3.0 # mm
+    medium: 7.0 # mm
+  distance_hit_threshold: 5.0 # mm distance to ground truth centroid

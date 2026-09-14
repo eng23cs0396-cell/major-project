@@ -1,0 +1,25 @@
+# Deep Learning Framework (CUDA 12.1 for RTX 4060)
+--extra-index-url https://download.pytorch.org/whl/cu121
+torch>=2.2.0
+torchvision>=0.17.0
+
+# Graph Neural Networks (Topology Modeling)
+torch-geometric>=2.5.0
+
+# Medical Imaging & 3D Volumetric Processing
+monai>=1.3.0
+nibabel>=5.2.0
+SimpleITK>=2.3.1
+scikit-image>=0.22.0
+scipy>=1.12.0
+networkx>=3.2.1
+
+# Data Science & Utilities
+numpy>=1.24.0,<2.0.0
+pandas>=2.2.0
+matplotlib>=3.8.0
+seaborn>=0.13.0
+tqdm>=4.66.0
+pyyaml>=6.0.1
+huggingface_hub>=0.23.0
+pytest>=8.0.0

@@ -1,6 +1,7 @@
 # Dataset (20 GB medical imaging data - excluded from GitHub)
 dataset(topAneu)/
 dataset*/
+sample_openneuro/
 *.nii
 *.nii.gz
 *.dcm
