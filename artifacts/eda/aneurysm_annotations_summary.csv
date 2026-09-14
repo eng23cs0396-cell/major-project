@@ -1,0 +1,388 @@
+scan_id,center,modality,label_id,location_name,morphology,voxel_count,volume_mm3,max_diameter_mm,equiv_diameter_mm,size_category,centroid_voxel_x,centroid_voxel_y,centroid_voxel_z,spacing_x,spacing_y,spacing_z
+topaneu_center1_mr_017,center1,mr,28,R-3.4 ICA C7-Pcom-junction,saccular,576,37.81,5.09,4.16,Medium (5-10mm),163.2,173.0,147.3,0.382,0.382,0.45
+topaneu_center1_mr_024,center1,mr,23,L-3.1 ICA infraclinoid C1-C5,saccular,713,31.47,5.79,3.92,Medium (5-10mm),289.7,266.5,70.3,0.251,0.251,0.7
+topaneu_center1_mr_024,center1,mr,24,R-3.2 ICA C6-OA-junction,fusiform,659,29.09,4.36,3.82,Small (3-5mm),232.3,224.6,74.9,0.251,0.251,0.7
+topaneu_center1_mr_024,center1,mr,25,L-3.2 ICA C6-OA-junction,saccular,362,15.98,4.61,3.13,Small (3-5mm),299.0,226.6,76.1,0.251,0.251,0.7
+topaneu_center1_mr_028,center1,mr,32,R-3.6 ICA C7-nonBranch,saccular,327,21.47,4.05,3.45,Small (3-5mm),135.5,161.1,150.2,0.382,0.382,0.45
+topaneu_center1_mr_033,center1,mr,25,L-3.2 ICA C6-OA-junction,saccular,1387,41.81,5.93,4.31,Medium (5-10mm),300.5,249.9,103.2,0.246,0.246,0.5
+topaneu_center1_mr_056,center1,mr,26,R-3.3 ICA C6-nonOA,saccular,508,33.35,4.74,3.99,Small (3-5mm),158.2,161.1,137.0,0.382,0.382,0.45
+topaneu_center1_mr_085,center1,mr,34,R-3.7 ICA C7-terminus,saccular,1206,36.35,4.89,4.11,Small (3-5mm),229.5,262.6,129.3,0.246,0.246,0.5
+topaneu_center1_mr_085,center1,mr,35,L-3.7 ICA C7-terminus,saccular,158,4.76,2.53,2.09,Very Small (<3mm),329.4,287.7,123.3,0.246,0.246,0.5
+topaneu_center1_mr_092,center1,mr,27,L-3.3 ICA C6-nonOA,saccular,92,4.06,2.41,1.98,Very Small (<3mm),308.9,246.3,79.9,0.251,0.251,0.7
+topaneu_center1_mr_092,center1,mr,35,L-3.7 ICA C7-terminus,saccular,201,8.87,3.45,2.57,Small (3-5mm),311.8,267.9,94.1,0.251,0.251,0.7
+topaneu_center1_mr_113,center1,mr,36,4.1 Acom complex,saccular,748,49.11,5.57,4.54,Medium (5-10mm),188.1,172.4,132.9,0.382,0.382,0.45
+topaneu_center1_mr_129,center1,mr,23,L-3.1 ICA infraclinoid C1-C5,saccular,1092,48.2,6.4,4.52,Medium (5-10mm),333.8,224.4,81.7,0.251,0.251,0.7
+topaneu_center1_mr_148,center1,mr,29,L-3.4 ICA C7-Pcom-junction,saccular,726,55.39,5.67,4.73,Medium (5-10mm),193.3,168.4,111.0,0.391,0.391,0.5
+topaneu_center1_mr_177,center1,mr,39,R-4.3 A2,saccular,1104,42.45,5.39,4.33,Medium (5-10mm),289.6,220.1,100.4,0.234,0.234,0.7
+topaneu_center1_mr_184,center1,mr,36,4.1 Acom complex,saccular,192,7.38,2.86,2.42,Very Small (<3mm),318.9,265.8,88.1,0.234,0.234,0.7
+topaneu_center1_mr_191,center1,mr,23,L-3.1 ICA infraclinoid C1-C5,saccular,353,10.64,3.53,2.73,Small (3-5mm),331.1,216.0,110.4,0.246,0.246,0.5
+topaneu_center1_mr_191,center1,mr,36,4.1 Acom complex,saccular,1403,42.29,5.81,4.32,Medium (5-10mm),279.1,229.4,129.9,0.246,0.246,0.5
+topaneu_center1_mr_193,center1,mr,35,L-3.7 ICA C7-terminus,saccular,1087,97.34,7.53,5.71,Medium (5-10mm),195.6,123.3,138.5,0.437,0.437,0.47
+topaneu_center1_mr_198,center1,mr,50,L-5.3 M1-M2 junction,saccular,6355,417.16,13.43,9.27,Large (>10mm),273.8,131.7,141.6,0.382,0.382,0.45
+topaneu_center1_mr_200,center1,mr,7,1.4 BA trunk,saccular,2992,90.19,7.87,5.56,Medium (5-10mm),297.5,293.5,107.2,0.246,0.246,0.5
+topaneu_center1_mr_200,center1,mr,19,L-2.1 P1P2,saccular,123,3.71,2.8,1.92,Very Small (<3mm),333.3,296.5,131.8,0.246,0.246,0.5
+topaneu_center1_mr_210,center1,mr,34,R-3.7 ICA C7-terminus,saccular,247,10.9,3.29,2.75,Small (3-5mm),216.7,263.1,100.1,0.251,0.251,0.7
+topaneu_center1_mr_210,center1,mr,46,L-5.1 M1 trunk,saccular,209,9.23,3.36,2.6,Small (3-5mm),360.1,275.5,98.5,0.251,0.251,0.7
+topaneu_center1_mr_210,center1,mr,48,L-5.2 M1 early bifurcation,saccular,447,19.73,3.89,3.35,Small (3-5mm),389.8,245.3,100.4,0.251,0.251,0.7
+topaneu_center1_mr_251,center1,mr,23,L-3.1 ICA infraclinoid C1-C5,saccular,465,12.77,4.38,2.9,Small (3-5mm),313.2,237.9,69.5,0.234,0.234,0.5
+topaneu_center1_mr_262,center1,mr,6,L-1.3 VA-PICA junction,saccular,695,19.09,4.09,3.32,Small (3-5mm),307.2,431.4,57.3,0.234,0.234,0.5
+topaneu_center1_mr_262,center1,mr,22,R-3.1 ICA infraclinoid C1-C5,saccular,737,20.24,3.91,3.38,Small (3-5mm),223.9,264.6,89.1,0.234,0.234,0.5
+topaneu_center1_mr_264,center1,mr,48,L-5.2 M1 early bifurcation,saccular,361,23.7,4.63,3.56,Small (3-5mm),254.6,160.4,143.5,0.382,0.382,0.45
+topaneu_center1_mr_301,center1,mr,23,L-3.1 ICA infraclinoid C1-C5,dissecting,14619,645.31,17.06,10.72,Large (>10mm),382.6,316.4,18.2,0.251,0.251,0.7
+topaneu_center1_mr_302,center1,mr,36,4.1 Acom complex,saccular,36414,1097.66,15.27,12.8,Large (>10mm),293.5,261.4,149.1,0.246,0.246,0.5
+topaneu_center1_mr_308,center1,mr,49,R-5.3 M1-M2 junction,saccular,3500,134.58,10.81,6.36,Large (>10mm),178.2,240.0,72.6,0.234,0.234,0.7
+topaneu_center1_mr_325,center1,mr,22,R-3.1 ICA infraclinoid C1-C5,saccular,26996,1772.51,20.86,15.02,Large (>10mm),180.9,257.0,74.3,0.382,0.382,0.45
+topaneu_center1_mr_336,center1,mr,36,4.1 Acom complex,saccular,2340,103.3,6.76,5.82,Medium (5-10mm),276.5,248.1,99.3,0.251,0.251,0.7
+topaneu_center1_mr_342,center1,mr,49,R-5.3 M1-M2 junction,saccular,1231,37.11,5.31,4.14,Medium (5-10mm),147.2,230.4,124.4,0.246,0.246,0.5
+topaneu_center1_mr_354,center1,mr,46,L-5.1 M1 trunk,saccular,623,27.5,5.36,3.74,Medium (5-10mm),369.3,267.4,92.7,0.251,0.251,0.7
+topaneu_center1_mr_359,center1,mr,27,L-3.3 ICA C6-nonOA,saccular,475,20.97,4.55,3.42,Small (3-5mm),305.1,245.7,82.2,0.251,0.251,0.7
+topaneu_center1_mr_359,center1,mr,36,4.1 Acom complex,saccular,486,21.45,4.33,3.45,Small (3-5mm),270.5,226.9,100.1,0.251,0.251,0.7
+topaneu_center1_mr_364,center1,mr,26,R-3.3 ICA C6-nonOA,saccular,172,11.29,3.41,2.78,Small (3-5mm),160.2,148.2,130.8,0.382,0.382,0.45
+topaneu_center1_mr_401,center1,mr,22,R-3.1 ICA infraclinoid C1-C5,saccular,867,26.13,5.25,3.68,Medium (5-10mm),234.4,225.8,91.7,0.246,0.246,0.5
+topaneu_center1_mr_401,center1,mr,27,L-3.3 ICA C6-nonOA,saccular,1027,30.96,4.93,3.9,Small (3-5mm),304.5,229.9,102.1,0.246,0.246,0.5
+topaneu_center1_mr_411,center1,mr,27,L-3.3 ICA C6-nonOA,saccular,1432,43.17,5.34,4.35,Medium (5-10mm),308.8,256.2,102.4,0.246,0.246,0.5
+topaneu_center1_mr_428,center1,mr,50,L-5.3 M1-M2 junction,saccular,1085,41.72,5.06,4.3,Medium (5-10mm),441.1,240.3,89.9,0.234,0.234,0.7
+topaneu_center1_mr_439,center1,mr,23,L-3.1 ICA infraclinoid C1-C5,saccular,7054,463.09,11.92,9.6,Large (>10mm),206.7,125.0,132.7,0.382,0.382,0.45
+topaneu_center1_mr_443,center1,mr,36,4.1 Acom complex,saccular,1145,105.94,7.88,5.87,Medium (5-10mm),159.9,140.7,101.0,0.41,0.41,0.55
+topaneu_center1_mr_474,center1,mr,25,L-3.2 ICA C6-OA-junction,saccular,1397,91.7,6.97,5.59,Medium (5-10mm),200.8,140.2,127.7,0.382,0.382,0.45
+topaneu_center1_mr_489,center1,mr,36,4.1 Acom complex,saccular,545,16.43,3.97,3.15,Small (3-5mm),274.1,253.4,126.9,0.246,0.246,0.5
+topaneu_center1_mr_494,center1,mr,22,R-3.1 ICA infraclinoid C1-C5,saccular,280,18.38,4.62,3.27,Small (3-5mm),138.2,159.6,107.6,0.382,0.382,0.45
+topaneu_center1_mr_509,center1,mr,23,L-3.1 ICA infraclinoid C1-C5,saccular,1349,51.87,6.59,4.63,Medium (5-10mm),347.4,260.1,77.9,0.234,0.234,0.7
+topaneu_center1_mr_516,center1,mr,22,R-3.1 ICA infraclinoid C1-C5,saccular,1351,59.64,6.7,4.85,Medium (5-10mm),233.2,212.6,71.9,0.251,0.251,0.7
+topaneu_center1_mr_516,center1,mr,49,R-5.3 M1-M2 junction,saccular,705,31.12,6.0,3.9,Medium (5-10mm),134.2,194.1,94.6,0.251,0.251,0.7
+topaneu_center1_mr_523,center1,mr,16,L-1.9 BA-SCA junction,fusiform,1963,75.48,6.69,5.24,Medium (5-10mm),308.6,324.3,85.9,0.234,0.234,0.7
+topaneu_center1_mr_523,center1,mr,32,R-3.6 ICA C7-nonBranch,saccular,648,24.92,5.19,3.62,Medium (5-10mm),285.4,227.4,76.3,0.234,0.234,0.7
+topaneu_center1_mr_525,center1,mr,22,R-3.1 ICA infraclinoid C1-C5,saccular,434,13.08,3.78,2.92,Small (3-5mm),230.7,264.2,91.8,0.246,0.246,0.5
+topaneu_center1_mr_525,center1,mr,49,R-5.3 M1-M2 junction,saccular,1247,37.59,5.06,4.16,Medium (5-10mm),166.5,243.1,107.4,0.246,0.246,0.5
+topaneu_center1_mr_527,center1,mr,23,L-3.1 ICA infraclinoid C1-C5,saccular,361,23.69,14.23,3.56,Large (>10mm),242.5,156.7,108.7,0.382,0.382,0.45
+topaneu_center1_mr_528,center1,mr,28,R-3.4 ICA C7-Pcom-junction,saccular,268,17.59,4.36,3.23,Small (3-5mm),156.3,175.8,146.0,0.382,0.382,0.45
+topaneu_center1_mr_538,center1,mr,36,4.1 Acom complex,saccular,417,16.03,4.07,3.13,Small (3-5mm),308.1,265.0,84.5,0.234,0.234,0.7
+topaneu_center1_mr_560,center1,mr,22,R-3.1 ICA infraclinoid C1-C5,saccular,1581,103.79,7.42,5.83,Medium (5-10mm),153.8,145.3,114.6,0.382,0.382,0.45
+topaneu_center1_mr_561,center1,mr,15,R-1.9 BA-SCA junction,saccular,297,8.95,3.33,2.58,Small (3-5mm),272.4,299.8,114.6,0.246,0.246,0.5
+topaneu_center1_mr_572,center1,mr,26,R-3.3 ICA C6-nonOA,saccular,407,26.72,5.18,3.71,Medium (5-10mm),164.2,140.4,109.7,0.382,0.382,0.45
+topaneu_center1_mr_581,center1,mr,23,L-3.1 ICA infraclinoid C1-C5,saccular,287,18.84,4.9,3.3,Small (3-5mm),201.4,134.3,131.8,0.382,0.382,0.45
+topaneu_center1_mr_585,center1,mr,11,R-1.7 BA-AICA junction,saccular,1167,76.61,7.18,5.27,Medium (5-10mm),171.9,212.3,130.7,0.382,0.382,0.45
+topaneu_center1_mr_612,center1,mr,36,4.1 Acom complex,saccular,336,22.06,4.08,3.48,Small (3-5mm),186.2,160.2,138.3,0.382,0.382,0.45
+topaneu_center1_mr_625,center1,mr,35,L-3.7 ICA C7-terminus,saccular,2066,62.28,7.06,4.92,Medium (5-10mm),348.9,262.4,117.2,0.246,0.246,0.5
+topaneu_center1_mr_625,center1,mr,49,R-5.3 M1-M2 junction,saccular,786,23.69,4.3,3.56,Small (3-5mm),167.5,230.7,101.7,0.246,0.246,0.5
+topaneu_center1_mr_626,center1,mr,49,R-5.3 M1-M2 junction,saccular,1566,47.21,5.95,4.48,Medium (5-10mm),158.2,226.1,101.9,0.246,0.246,0.5
+topaneu_center1_mr_630,center1,mr,36,4.1 Acom complex,saccular,564,37.04,5.33,4.14,Medium (5-10mm),189.2,146.4,151.8,0.382,0.382,0.45
+topaneu_center1_mr_647,center1,mr,49,R-5.3 M1-M2 junction,saccular,304,19.96,4.33,3.37,Small (3-5mm),97.1,169.3,134.6,0.382,0.382,0.45
+topaneu_center1_mr_664,center1,mr,22,R-3.1 ICA infraclinoid C1-C5,saccular,552,36.24,5.14,4.11,Medium (5-10mm),176.0,116.1,123.4,0.382,0.382,0.45
+topaneu_center1_mr_670,center1,mr,26,R-3.3 ICA C6-nonOA,saccular,704,27.07,4.5,3.73,Small (3-5mm),285.0,247.7,58.9,0.234,0.234,0.7
+topaneu_center1_mr_670,center1,mr,50,L-5.3 M1-M2 junction,saccular,763,29.34,6.47,3.83,Medium (5-10mm),459.4,245.2,71.6,0.234,0.234,0.7
+topaneu_center1_mr_681,center1,mr,35,L-3.7 ICA C7-terminus,saccular,3540,156.26,9.67,6.68,Medium (5-10mm),318.0,250.5,92.3,0.251,0.251,0.7
+topaneu_center1_mr_682,center1,mr,40,L-4.3 A2,saccular,91,5.97,2.62,2.25,Very Small (<3mm),178.1,143.6,175.2,0.382,0.382,0.45
+topaneu_center1_mr_694,center1,mr,34,R-3.7 ICA C7-terminus,saccular,358,27.31,5.37,3.74,Medium (5-10mm),145.5,167.0,127.2,0.391,0.391,0.5
+topaneu_center1_mr_702,center1,mr,25,L-3.2 ICA C6-OA-junction,saccular,347,15.32,4.13,3.08,Small (3-5mm),299.8,186.2,89.0,0.251,0.251,0.7
+topaneu_center1_mr_702,center1,mr,26,R-3.3 ICA C6-nonOA,saccular,209,9.23,4.32,2.6,Small (3-5mm),250.3,185.1,91.0,0.251,0.251,0.7
+topaneu_center1_mr_720,center1,mr,23,L-3.1 ICA infraclinoid C1-C5,saccular,821,75.95,7.65,5.25,Medium (5-10mm),196.8,141.5,69.9,0.41,0.41,0.55
+topaneu_center1_mr_741,center1,mr,27,L-3.3 ICA C6-nonOA,saccular,6986,191.9,10.42,7.16,Large (>10mm),329.7,272.7,116.2,0.234,0.234,0.5
+topaneu_center1_mr_742,center1,mr,27,L-3.3 ICA C6-nonOA,saccular,397,26.06,4.23,3.68,Small (3-5mm),206.6,138.1,112.9,0.382,0.382,0.45
+topaneu_center1_mr_744,center1,mr,31,L-3.5 ICA C7-AChA-junction,saccular,1216,79.82,7.54,5.34,Medium (5-10mm),203.5,169.0,128.5,0.382,0.382,0.45
+topaneu_center1_mr_750,center1,mr,50,L-5.3 M1-M2 junction,saccular,1447,55.64,5.92,4.74,Medium (5-10mm),421.8,285.7,75.9,0.234,0.234,0.7
+topaneu_center1_mr_765,center1,mr,27,L-3.3 ICA C6-nonOA,saccular,71,4.66,2.9,2.07,Very Small (<3mm),211.5,141.2,143.6,0.382,0.382,0.45
+topaneu_center1_mr_772,center1,mr,23,L-3.1 ICA infraclinoid C1-C5,saccular,229,10.11,3.14,2.68,Small (3-5mm),305.9,203.1,83.0,0.251,0.251,0.7
+topaneu_center1_mr_772,center1,mr,26,R-3.3 ICA C6-nonOA,saccular,3976,175.51,8.0,6.95,Medium (5-10mm),237.1,215.9,89.6,0.251,0.251,0.7
+topaneu_center1_mr_774,center1,mr,30,R-3.5 ICA C7-AChA-junction,saccular,200,9.63,3.27,2.64,Small (3-5mm),229.7,260.1,74.9,0.262,0.262,0.7
+topaneu_center1_mr_776,center1,mr,34,R-3.7 ICA C7-terminus,saccular,1330,40.09,5.34,4.25,Medium (5-10mm),221.4,238.6,151.8,0.246,0.246,0.5
+topaneu_center1_mr_789,center1,mr,28,R-3.4 ICA C7-Pcom-junction,saccular,96,4.24,2.5,2.01,Very Small (<3mm),214.5,252.6,79.1,0.251,0.251,0.7
+topaneu_center1_mr_792,center1,mr,50,L-5.3 M1-M2 junction,saccular,682,20.56,4.27,3.4,Small (3-5mm),392.6,244.9,102.6,0.246,0.246,0.5
+topaneu_center1_mr_795,center1,mr,22,R-3.1 ICA infraclinoid C1-C5,saccular,577,15.85,4.0,3.12,Small (3-5mm),258.5,296.6,102.2,0.234,0.234,0.5
+topaneu_center1_mr_795,center1,mr,27,L-3.3 ICA C6-nonOA,saccular,863,23.7,4.56,3.56,Small (3-5mm),341.0,263.1,103.0,0.234,0.234,0.5
+topaneu_center1_mr_800,center1,mr,21,L-2.2 P3P4,saccular,495,32.5,4.56,3.96,Small (3-5mm),207.0,273.6,146.8,0.382,0.382,0.45
+topaneu_center1_mr_804,center1,mr,50,L-5.3 M1-M2 junction,saccular,175,11.49,3.79,2.8,Small (3-5mm),255.3,130.2,159.7,0.382,0.382,0.45
+topaneu_center1_mr_807,center1,mr,36,4.1 Acom complex,saccular,518,34.01,4.55,4.02,Small (3-5mm),172.8,134.3,143.8,0.382,0.382,0.45
+topaneu_center1_mr_810,center1,mr,50,L-5.3 M1-M2 junction,saccular,477,44.13,5.47,4.38,Medium (5-10mm),267.4,143.7,104.0,0.41,0.41,0.55
+topaneu_center1_mr_816,center1,mr,28,R-3.4 ICA C7-Pcom-junction,saccular,262,17.2,3.95,3.2,Small (3-5mm),141.3,164.7,144.6,0.382,0.382,0.45
+topaneu_center1_mr_842,center1,mr,49,R-5.3 M1-M2 junction,saccular,1637,107.45,7.29,5.9,Medium (5-10mm),102.3,151.6,124.4,0.382,0.382,0.45
+topaneu_center1_mr_877,center1,mr,5,R-1.3 VA-PICA junction,saccular,969,42.77,4.93,4.34,Small (3-5mm),246.4,392.6,33.2,0.251,0.251,0.7
+topaneu_center1_mr_877,center1,mr,47,R-5.2 M1 early bifurcation,saccular,1566,69.13,6.09,5.09,Medium (5-10mm),173.8,268.9,75.6,0.251,0.251,0.7
+topaneu_center1_mr_892,center1,mr,37,R-4.2 A1,saccular,729,47.85,5.18,4.5,Medium (5-10mm),148.1,199.8,123.3,0.382,0.382,0.45
+topaneu_center1_mr_895,center1,mr,8,1.5 VA-BA junction,saccular,3959,108.74,7.27,5.92,Medium (5-10mm),258.3,239.2,93.8,0.234,0.234,0.5
+topaneu_center1_mr_895,center1,mr,41,R-4.4 A3,saccular,1567,43.04,6.14,4.35,Medium (5-10mm),282.2,154.6,183.8,0.234,0.234,0.5
+topaneu_center1_mr_895,center1,mr,47,R-5.2 M1 early bifurcation,saccular,586,16.1,3.8,3.13,Small (3-5mm),171.2,233.3,157.2,0.234,0.234,0.5
+topaneu_center1_mr_895,center1,mr,48,L-5.2 M1 early bifurcation,saccular,6127,168.28,8.27,6.85,Medium (5-10mm),380.8,210.6,159.3,0.234,0.234,0.5
+topaneu_center1_mr_909,center1,mr,27,L-3.3 ICA C6-nonOA,saccular,191,12.54,3.53,2.88,Small (3-5mm),204.3,137.4,114.9,0.382,0.382,0.45
+topaneu_center1_mr_917,center1,mr,23,L-3.1 ICA infraclinoid C1-C5,fusiform,8775,668.4,21.3,10.85,Large (>10mm),231.6,183.9,46.7,0.391,0.391,0.499
+topaneu_center1_mr_917,center1,mr,36,4.1 Acom complex,saccular,1045,79.6,6.43,5.34,Medium (5-10mm),181.2,142.7,137.7,0.391,0.391,0.499
+topaneu_center1_mr_926,center1,mr,23,L-3.1 ICA infraclinoid C1-C5,saccular,261,17.13,3.72,3.2,Small (3-5mm),226.5,150.9,109.8,0.382,0.382,0.45
+topaneu_center1_mr_928,center1,mr,25,L-3.2 ICA C6-OA-junction,saccular,828,24.96,4.88,3.63,Small (3-5mm),312.4,211.5,84.1,0.246,0.246,0.5
+topaneu_center1_mr_975,center1,mr,26,R-3.3 ICA C6-nonOA,saccular,176,11.57,3.75,2.81,Small (3-5mm),157.6,157.8,132.0,0.382,0.382,0.451
+topaneu_center1_mr_981,center1,mr,50,L-5.3 M1-M2 junction,saccular,716,46.99,6.5,4.48,Medium (5-10mm),263.4,144.3,113.6,0.382,0.382,0.45
+topaneu_center1_mr_991,center1,mr,17,1.10 BA tip,saccular,446,12.25,3.84,2.86,Small (3-5mm),284.8,286.1,118.1,0.234,0.234,0.5
+topaneu_center2_ct_105,center2,ct,25,L-3.2 ICA C6-OA-junction,saccular,242,36.06,5.35,4.1,Medium (5-10mm),164.8,120.6,60.0,0.488,0.488,0.625
+topaneu_center2_ct_107,center2,ct,26,R-3.3 ICA C6-nonOA,saccular,46,6.85,2.52,2.36,Very Small (<3mm),134.5,129.9,39.0,0.488,0.488,0.625
+topaneu_center2_ct_108,center2,ct,41,R-4.4 A3,saccular,134,17.05,3.57,3.19,Small (3-5mm),126.2,81.1,106.0,0.451,0.451,0.625
+topaneu_center2_ct_109,center2,ct,36,4.1 Acom complex,saccular,160,39.06,4.59,4.21,Small (3-5mm),112.6,94.5,70.7,0.625,0.625,0.625
+topaneu_center2_ct_112,center2,ct,49,R-5.3 M1-M2 junction,saccular,503,122.8,6.67,6.17,Medium (5-10mm),40.0,96.4,100.8,0.625,0.625,0.625
+topaneu_center2_ct_113,center2,ct,23,L-3.1 ICA infraclinoid C1-C5,saccular,231,34.42,5.24,4.04,Medium (5-10mm),146.5,123.7,66.5,0.488,0.488,0.625
+topaneu_center2_ct_118,center2,ct,36,4.1 Acom complex,saccular,822,122.49,8.09,6.16,Medium (5-10mm),147.8,103.2,117.2,0.488,0.488,0.625
+topaneu_center2_ct_118,center2,ct,47,R-5.2 M1 early bifurcation,saccular,336,50.07,5.93,4.57,Medium (5-10mm),94.2,111.5,105.0,0.488,0.488,0.625
+topaneu_center2_ct_119,center2,ct,49,R-5.3 M1-M2 junction,saccular,654,97.45,6.62,5.71,Medium (5-10mm),84.3,105.0,84.0,0.488,0.488,0.625
+topaneu_center2_ct_120,center2,ct,51,R-5.3 Distal-M2M3,fusiform,900,149.55,7.58,6.59,Medium (5-10mm),62.2,106.7,140.3,0.516,0.516,0.625
+topaneu_center2_ct_125,center2,ct,42,L-4.4 A3,saccular,92,13.45,3.24,2.95,Small (3-5mm),158.3,108.9,126.7,0.457,0.457,0.7
+topaneu_center2_ct_126,center2,ct,49,R-5.3 M1-M2 junction,saccular,202,60.2,5.5,4.86,Medium (5-10mm),58.8,101.2,42.6,0.488,0.488,1.25
+topaneu_center2_ct_126,center2,ct,50,L-5.3 M1-M2 junction,saccular,13842,4125.23,22.01,19.9,Large (>10mm),220.2,122.2,50.7,0.488,0.488,1.25
+topaneu_center2_ct_127,center2,ct,41,R-4.4 A3,dissecting,78,13.12,5.24,2.93,Medium (5-10mm),150.8,70.1,79.8,0.41,0.41,1.0
+topaneu_center2_ct_128,center2,ct,24,R-3.2 ICA C6-OA-junction,saccular,48,10.58,3.09,2.72,Small (3-5mm),103.9,107.4,78.2,0.594,0.594,0.625
+topaneu_center2_ct_130,center2,ct,28,R-3.4 ICA C7-Pcom-junction,saccular,226,41.64,5.51,4.3,Medium (5-10mm),95.9,124.8,84.8,0.543,0.543,0.625
+topaneu_center2_ct_130,center2,ct,34,R-3.7 ICA C7-terminus,saccular,263,48.46,5.45,4.52,Medium (5-10mm),94.1,112.3,103.7,0.543,0.543,0.625
+topaneu_center2_ct_134,center2,ct,29,L-3.4 ICA C7-Pcom-junction,saccular,95,19.31,3.95,3.33,Small (3-5mm),125.6,116.2,56.5,0.582,0.582,0.6
+topaneu_center2_ct_137,center2,ct,17,1.10 BA tip,saccular,1288,204.41,8.73,7.31,Medium (5-10mm),147.4,130.6,135.5,0.504,0.504,0.625
+topaneu_center2_ct_138,center2,ct,36,4.1 Acom complex,saccular,2664,358.53,12.51,8.81,Large (>10mm),178.5,140.8,83.4,0.41,0.41,0.8
+topaneu_center2_ct_141,center2,ct,36,4.1 Acom complex,saccular,3459,176.24,9.04,6.96,Medium (5-10mm),164.1,135.6,195.0,0.412,0.412,0.3
+topaneu_center2_ct_141,center2,ct,42,L-4.4 A3,saccular,907,46.21,5.43,4.45,Medium (5-10mm),159.7,83.6,268.3,0.412,0.412,0.3
+topaneu_center2_ct_142,center2,ct,49,R-5.3 M1-M2 junction,saccular,263,32.96,4.46,3.98,Small (3-5mm),64.8,102.3,117.0,0.457,0.457,0.6
+topaneu_center2_ct_144,center2,ct,36,4.1 Acom complex,saccular,190,22.65,4.48,3.51,Small (3-5mm),141.7,129.8,104.9,0.488,0.488,0.5
+topaneu_center2_ct_147,center2,ct,36,4.1 Acom complex,saccular,870,84.59,7.41,5.45,Medium (5-10mm),158.4,109.9,151.4,0.465,0.465,0.45
+topaneu_center2_ct_150,center2,ct,32,R-3.6 ICA C7-nonBranch,saccular,23,2.98,1.93,1.78,Very Small (<3mm),129.5,140.6,97.6,0.455,0.455,0.625
+topaneu_center2_ct_150,center2,ct,45,R-5.1 M1 trunk,saccular,696,90.09,7.35,5.56,Medium (5-10mm),103.6,134.9,109.9,0.455,0.455,0.625
+topaneu_center2_ct_150,center2,ct,46,L-5.1 M1 trunk,saccular,3877,501.82,11.1,9.86,Large (>10mm),201.0,136.9,102.4,0.455,0.455,0.625
+topaneu_center2_ct_150,center2,ct,47,R-5.2 M1 early bifurcation,saccular,85,11.0,3.3,2.76,Small (3-5mm),95.1,118.1,104.3,0.455,0.455,0.625
+topaneu_center2_ct_154,center2,ct,5,R-1.3 VA-PICA junction,dissecting,2395,83.92,7.5,5.43,Medium (5-10mm),165.6,209.5,92.2,0.342,0.342,0.3
+topaneu_center2_ct_156,center2,ct,7,1.4 BA trunk,saccular,261,39.83,4.93,4.24,Small (3-5mm),142.9,131.8,82.8,0.494,0.494,0.625
+topaneu_center2_ct_160,center2,ct,45,R-5.1 M1 trunk,saccular,60,8.52,2.84,2.53,Very Small (<3mm),90.2,140.7,68.3,0.477,0.477,0.625
+topaneu_center2_ct_161,center2,ct,36,4.1 Acom complex,saccular,114,18.09,3.49,3.26,Small (3-5mm),138.9,120.2,92.8,0.504,0.504,0.625
+topaneu_center2_ct_162,center2,ct,17,1.10 BA tip,saccular,3862,753.69,13.83,11.29,Large (>10mm),119.4,131.1,98.2,0.57,0.57,0.6
+topaneu_center2_ct_163,center2,ct,30,R-3.5 ICA C7-AChA-junction,saccular,103,18.88,4.06,3.3,Small (3-5mm),105.3,141.5,57.9,0.512,0.512,0.7
+topaneu_center2_ct_164,center2,ct,38,L-4.2 A1,saccular,216,34.55,6.61,4.04,Medium (5-10mm),153.5,125.4,94.3,0.506,0.506,0.625
+topaneu_center2_ct_165,center2,ct,30,R-3.5 ICA C7-AChA-junction,saccular,88,16.92,3.43,3.19,Small (3-5mm),100.1,132.0,71.2,0.555,0.555,0.625
+topaneu_center2_ct_166,center2,ct,17,1.10 BA tip,saccular,354,52.75,6.6,4.65,Medium (5-10mm),134.3,143.1,93.8,0.488,0.488,0.625
+topaneu_center2_ct_166,center2,ct,24,R-3.2 ICA C6-OA-junction,saccular,60,8.94,2.91,2.58,Very Small (<3mm),122.6,111.0,86.5,0.488,0.488,0.625
+topaneu_center2_ct_167,center2,ct,6,L-1.3 VA-PICA junction,saccular,177,39.26,5.47,4.22,Medium (5-10mm),123.4,179.0,32.2,0.596,0.596,0.625
+topaneu_center2_ct_169,center2,ct,45,R-5.1 M1 trunk,saccular,15949,1825.98,17.54,15.16,Large (>10mm),107.3,148.0,122.4,0.479,0.479,0.5
+topaneu_center2_ct_170,center2,ct,35,L-3.7 ICA C7-terminus,saccular,148,17.43,4.83,3.22,Small (3-5mm),196.6,168.6,73.0,0.41,0.41,0.7
+topaneu_center2_ct_171,center2,ct,47,R-5.2 M1 early bifurcation,saccular,157,21.13,3.95,3.43,Small (3-5mm),108.5,112.4,81.1,0.41,0.41,0.8
+topaneu_center2_ct_172,center2,ct,17,1.10 BA tip,saccular,140,20.49,3.91,3.4,Small (3-5mm),168.3,191.5,76.7,0.428,0.428,0.8
+topaneu_center2_ct_172,center2,ct,28,R-3.4 ICA C7-Pcom-junction,saccular,579,84.75,6.97,5.45,Medium (5-10mm),129.1,164.2,67.9,0.428,0.428,0.8
+topaneu_center2_ct_172,center2,ct,29,L-3.4 ICA C7-Pcom-junction,saccular,1602,234.48,9.67,7.65,Medium (5-10mm),188.1,164.0,67.2,0.428,0.428,0.8
+topaneu_center2_ct_172,center2,ct,49,R-5.3 M1-M2 junction,saccular,69,10.1,3.21,2.68,Small (3-5mm),90.0,135.7,82.7,0.428,0.428,0.8
+topaneu_center2_ct_173,center2,ct,28,R-3.4 ICA C7-Pcom-junction,saccular,72,10.44,2.92,2.71,Very Small (<3mm),106.9,147.3,75.7,0.455,0.455,0.7
+topaneu_center2_ct_174,center2,ct,28,R-3.4 ICA C7-Pcom-junction,saccular,27,5.3,2.17,2.16,Very Small (<3mm),103.6,92.1,91.0,0.561,0.561,0.625
+topaneu_center2_ct_174,center2,ct,30,R-3.5 ICA C7-AChA-junction,saccular,110,21.6,4.26,3.46,Small (3-5mm),98.2,97.8,88.4,0.561,0.561,0.625
+topaneu_center2_ct_175,center2,ct,50,L-5.3 M1-M2 junction,saccular,288,49.77,4.97,4.56,Small (3-5mm),141.0,124.2,95.2,0.588,0.588,0.5
+topaneu_center2_ct_184,center2,ct,50,L-5.3 M1-M2 junction,dissecting,584,87.02,6.42,5.5,Medium (5-10mm),192.9,125.4,80.9,0.488,0.488,0.625
+topaneu_center2_ct_189,center2,ct,28,R-3.4 ICA C7-Pcom-junction,saccular,269,29.6,5.26,3.84,Medium (5-10mm),132.2,162.5,60.6,0.396,0.396,0.7
+topaneu_center2_ct_190,center2,ct,49,R-5.3 M1-M2 junction,saccular,669,112.54,7.85,5.99,Medium (5-10mm),93.8,93.6,69.3,0.41,0.41,1.0
+topaneu_center2_ct_191,center2,ct,31,L-3.5 ICA C7-AChA-junction,saccular,1464,146.36,11.09,6.54,Large (>10mm),197.2,163.1,66.8,0.408,0.408,0.6
+topaneu_center2_ct_192,center2,ct,24,R-3.2 ICA C6-OA-junction,saccular,212,11.21,3.39,2.78,Small (3-5mm),121.0,110.7,214.6,0.42,0.42,0.3
+topaneu_center2_ct_192,center2,ct,30,R-3.5 ICA C7-AChA-junction,saccular,1426,75.44,8.64,5.24,Medium (5-10mm),114.8,139.4,208.1,0.42,0.42,0.3
+topaneu_center2_ct_193,center2,ct,49,R-5.3 M1-M2 junction,saccular,625,24.57,4.22,3.61,Small (3-5mm),116.5,126.6,217.9,0.362,0.362,0.3
+topaneu_center2_ct_196,center2,ct,36,4.1 Acom complex,saccular,154,22.95,4.34,3.53,Small (3-5mm),151.6,123.5,96.4,0.488,0.488,0.625
+topaneu_center2_ct_196,center2,ct,49,R-5.3 M1-M2 junction,saccular,31,4.62,2.17,2.07,Very Small (<3mm),68.0,113.4,88.2,0.488,0.488,0.625
+topaneu_center2_ct_197,center2,ct,37,R-4.2 A1,saccular,548,66.68,6.74,5.03,Medium (5-10mm),134.0,144.0,68.9,0.39,0.39,0.8
+topaneu_center2_mr_002,center2,mr,50,L-5.3 M1-M2 junction,saccular,383,18.66,4.25,3.29,Small (3-5mm),343.2,205.4,71.9,0.298,0.298,0.55
+topaneu_center2_mr_004,center2,mr,17,1.10 BA tip,saccular,2432,118.48,7.41,6.09,Medium (5-10mm),238.7,260.6,85.4,0.298,0.298,0.55
+topaneu_center2_mr_004,center2,mr,49,R-5.3 M1-M2 junction,saccular,3422,166.71,8.56,6.83,Medium (5-10mm),134.2,163.3,91.0,0.298,0.298,0.55
+topaneu_center2_mr_007,center2,mr,47,R-5.2 M1 early bifurcation,saccular,227,11.06,3.23,2.76,Small (3-5mm),152.7,178.2,101.0,0.298,0.298,0.55
+topaneu_center2_mr_010,center2,mr,26,R-3.3 ICA C6-nonOA,saccular,258,12.57,3.77,2.88,Small (3-5mm),211.2,212.2,79.6,0.298,0.298,0.55
+topaneu_center2_mr_011,center2,mr,36,4.1 Acom complex,saccular,303,27.73,4.48,3.76,Small (3-5mm),177.2,130.8,82.1,0.391,0.391,0.6
+topaneu_center2_mr_012,center2,mr,22,R-3.1 ICA infraclinoid C1-C5,saccular,13550,660.12,15.77,10.8,Large (>10mm),229.1,212.6,73.4,0.298,0.298,0.55
+topaneu_center2_mr_012,center2,mr,47,R-5.2 M1 early bifurcation,saccular,299,14.57,3.71,3.03,Small (3-5mm),148.3,221.3,82.2,0.298,0.298,0.55
+topaneu_center2_mr_016,center2,mr,25,L-3.2 ICA C6-OA-junction,saccular,461,22.46,4.44,3.5,Small (3-5mm),275.4,190.2,94.5,0.298,0.298,0.55
+topaneu_center2_mr_017,center2,mr,36,4.1 Acom complex,saccular,511,24.89,4.39,3.62,Small (3-5mm),236.3,214.5,108.3,0.298,0.298,0.55
+topaneu_center2_mr_018,center2,mr,36,4.1 Acom complex,saccular,70,3.41,2.24,1.87,Very Small (<3mm),251.4,252.7,104.0,0.298,0.298,0.55
+topaneu_center2_mr_019,center2,mr,22,R-3.1 ICA infraclinoid C1-C5,saccular,350,17.05,4.7,3.19,Small (3-5mm),226.8,190.8,95.1,0.298,0.298,0.55
+topaneu_center2_mr_020,center2,mr,26,R-3.3 ICA C6-nonOA,saccular,10016,487.95,12.08,9.77,Large (>10mm),241.0,234.2,97.2,0.298,0.298,0.55
+topaneu_center2_mr_025,center2,mr,49,R-5.3 M1-M2 junction,saccular,847,41.26,5.71,4.29,Medium (5-10mm),119.1,166.5,81.4,0.298,0.298,0.55
+topaneu_center2_mr_028,center2,mr,22,R-3.1 ICA infraclinoid C1-C5,saccular,726,35.37,4.57,4.07,Small (3-5mm),204.8,191.7,85.6,0.298,0.298,0.55
+topaneu_center2_mr_029,center2,mr,24,R-3.2 ICA C6-OA-junction,saccular,179,8.72,3.16,2.55,Small (3-5mm),200.2,187.8,66.3,0.298,0.298,0.55
+topaneu_center2_mr_031,center2,mr,45,R-5.1 M1 trunk,saccular,344,16.76,3.99,3.18,Small (3-5mm),159.7,210.8,102.0,0.298,0.298,0.55
+topaneu_center2_mr_032,center2,mr,47,R-5.2 M1 early bifurcation,saccular,496,24.16,4.68,3.59,Small (3-5mm),166.8,192.4,92.1,0.298,0.298,0.55
+topaneu_center2_mr_032,center2,mr,49,R-5.3 M1-M2 junction,saccular,1477,71.96,6.35,5.16,Medium (5-10mm),133.0,169.1,100.0,0.298,0.298,0.55
+topaneu_center2_mr_034,center2,mr,22,R-3.1 ICA infraclinoid C1-C5,saccular,348,16.95,3.99,3.19,Small (3-5mm),208.7,190.5,86.1,0.298,0.298,0.55
+topaneu_center2_mr_035,center2,mr,47,R-5.2 M1 early bifurcation,saccular,776,37.8,4.83,4.16,Small (3-5mm),144.2,195.3,87.9,0.298,0.298,0.55
+topaneu_center2_mr_038,center2,mr,50,L-5.3 M1-M2 junction,saccular,1142,55.63,5.89,4.74,Medium (5-10mm),327.5,182.6,121.2,0.298,0.298,0.55
+topaneu_center2_mr_042,center2,mr,27,L-3.3 ICA C6-nonOA,saccular,692,33.71,4.55,4.01,Small (3-5mm),267.2,194.0,73.7,0.298,0.298,0.55
+topaneu_center2_mr_044,center2,mr,34,R-3.7 ICA C7-terminus,saccular,267,13.01,4.11,2.92,Small (3-5mm),169.6,205.3,96.2,0.298,0.298,0.55
+topaneu_center2_mr_047,center2,mr,49,R-5.3 M1-M2 junction,saccular,1486,72.39,6.19,5.17,Medium (5-10mm),109.1,161.0,106.1,0.298,0.298,0.55
+topaneu_center2_mr_048,center2,mr,49,R-5.3 M1-M2 junction,saccular,146,7.11,2.9,2.39,Very Small (<3mm),119.2,200.9,91.2,0.298,0.298,0.55
+topaneu_center2_mr_049,center2,mr,49,R-5.3 M1-M2 junction,saccular,744,36.25,4.87,4.11,Small (3-5mm),132.3,194.3,82.5,0.298,0.298,0.55
+topaneu_center2_mr_050,center2,mr,49,R-5.3 M1-M2 junction,saccular,448,21.83,4.08,3.47,Small (3-5mm),128.8,171.8,90.5,0.298,0.298,0.55
+topaneu_center2_mr_051,center2,mr,50,L-5.3 M1-M2 junction,saccular,1928,93.93,7.21,5.64,Medium (5-10mm),372.8,218.3,101.5,0.298,0.298,0.55
+topaneu_center2_mr_054,center2,mr,36,4.1 Acom complex,saccular,76,3.7,2.83,1.92,Very Small (<3mm),255.7,201.8,93.4,0.298,0.298,0.55
+topaneu_center2_mr_055,center2,mr,22,R-3.1 ICA infraclinoid C1-C5,saccular,408,19.88,4.23,3.36,Small (3-5mm),205.4,202.2,77.8,0.298,0.298,0.55
+topaneu_center2_mr_056,center2,mr,49,R-5.3 M1-M2 junction,saccular,126,6.14,2.8,2.27,Very Small (<3mm),123.6,197.7,80.1,0.298,0.298,0.55
+topaneu_center2_mr_057,center2,mr,25,L-3.2 ICA C6-OA-junction,saccular,909,44.28,6.14,4.39,Medium (5-10mm),265.3,202.2,89.7,0.298,0.298,0.55
+topaneu_center2_mr_058,center2,mr,36,4.1 Acom complex,saccular,545,26.55,4.8,3.7,Small (3-5mm),243.7,214.8,106.1,0.298,0.298,0.55
+topaneu_center2_mr_069,center2,mr,25,L-3.2 ICA C6-OA-junction,saccular,455,20.15,3.89,3.38,Small (3-5mm),270.5,177.8,99.8,0.298,0.298,0.5
+topaneu_center2_mr_074,center2,mr,22,R-3.1 ICA infraclinoid C1-C5,saccular,200,9.74,3.39,2.65,Small (3-5mm),191.2,232.4,71.3,0.298,0.298,0.55
+topaneu_center2_mr_074,center2,mr,28,R-3.4 ICA C7-Pcom-junction,saccular,395,19.24,4.56,3.32,Small (3-5mm),198.9,237.0,80.2,0.298,0.298,0.55
+topaneu_center2_mr_074,center2,mr,29,L-3.4 ICA C7-Pcom-junction,saccular,152,7.41,3.33,2.42,Small (3-5mm),278.9,246.2,80.4,0.298,0.298,0.55
+topaneu_center2_mr_074,center2,mr,50,L-5.3 M1-M2 junction,saccular,29,1.41,1.49,1.39,Very Small (<3mm),363.5,213.5,94.8,0.298,0.298,0.55
+topaneu_center2_mr_077,center2,mr,29,L-3.4 ICA C7-Pcom-junction,saccular,371,18.07,4.69,3.26,Small (3-5mm),285.2,241.3,87.3,0.298,0.298,0.55
+topaneu_center2_mr_077,center2,mr,31,L-3.5 ICA C7-AChA-junction,saccular,131,6.38,3.17,2.3,Small (3-5mm),300.4,240.8,91.0,0.298,0.298,0.55
+topaneu_center2_mr_078,center2,mr,37,R-4.2 A1,saccular,151,7.36,2.72,2.41,Very Small (<3mm),194.9,204.1,108.9,0.298,0.298,0.55
+topaneu_center2_mr_078,center2,mr,50,L-5.3 M1-M2 junction,saccular,1509,73.51,6.18,5.2,Medium (5-10mm),310.4,171.6,97.3,0.298,0.298,0.55
+topaneu_center2_mr_079,center2,mr,49,R-5.3 M1-M2 junction,saccular,1506,73.37,10.7,5.19,Large (>10mm),124.1,193.6,101.7,0.298,0.298,0.55
+topaneu_center2_mr_080,center2,mr,17,1.10 BA tip,fusiform,11508,560.64,12.53,10.23,Large (>10mm),260.4,247.8,87.0,0.298,0.298,0.55
+topaneu_center2_mr_080,center2,mr,41,R-4.4 A3,saccular,105,5.12,2.46,2.14,Very Small (<3mm),244.4,215.3,152.8,0.298,0.298,0.55
+topaneu_center2_mr_080,center2,mr,49,R-5.3 M1-M2 junction,saccular,315,15.35,3.58,3.08,Small (3-5mm),149.7,193.1,80.7,0.298,0.298,0.55
+topaneu_center2_mr_080,center2,mr,50,L-5.3 M1-M2 junction,fusiform,1879,91.54,6.46,5.59,Medium (5-10mm),342.1,204.1,91.5,0.298,0.298,0.55
+topaneu_center2_mr_083,center2,mr,23,L-3.1 ICA infraclinoid C1-C5,saccular,414,20.17,4.53,3.38,Small (3-5mm),276.5,194.8,79.9,0.298,0.298,0.55
+topaneu_center2_mr_083,center2,mr,25,L-3.2 ICA C6-OA-junction,saccular,1363,66.4,6.27,5.02,Medium (5-10mm),280.4,185.9,91.3,0.298,0.298,0.55
+topaneu_center2_mr_083,center2,mr,26,R-3.3 ICA C6-nonOA,saccular,625,30.45,4.75,3.87,Small (3-5mm),233.1,211.1,88.3,0.298,0.298,0.55
+topaneu_center2_mr_085,center2,mr,6,L-1.3 VA-PICA junction,fusiform,42588,2074.78,26.27,15.82,Large (>10mm),269.3,295.8,34.6,0.298,0.298,0.55
+topaneu_center2_mr_085,center2,mr,19,L-2.1 P1P2,fusiform,5493,267.6,13.22,8.0,Large (>10mm),207.2,240.9,96.3,0.298,0.298,0.55
+topaneu_center2_mr_085,center2,mr,31,L-3.5 ICA C7-AChA-junction,saccular,1514,73.76,6.94,5.2,Medium (5-10mm),249.4,226.3,69.9,0.298,0.298,0.55
+topaneu_center2_mr_085,center2,mr,49,R-5.3 M1-M2 junction,saccular,2380,115.95,7.73,6.05,Medium (5-10mm),85.3,188.1,80.3,0.298,0.298,0.55
+topaneu_center2_mr_086,center2,mr,22,R-3.1 ICA infraclinoid C1-C5,saccular,156,11.57,3.36,2.81,Small (3-5mm),179.9,174.4,82.0,0.352,0.352,0.6
+topaneu_center2_mr_086,center2,mr,26,R-3.3 ICA C6-nonOA,saccular,86,6.38,2.81,2.3,Very Small (<3mm),172.8,174.0,88.3,0.352,0.352,0.6
+topaneu_center4_ct_002,center4,ct,27,L-3.3 ICA C6-nonOA,saccular,304,14.05,3.55,2.99,Small (3-5mm),185.5,161.6,134.9,0.43,0.43,0.25
+topaneu_center4_ct_002,center4,ct,29,L-3.4 ICA C7-Pcom-junction,saccular,338,15.63,4.16,3.1,Small (3-5mm),192.6,174.0,160.8,0.43,0.43,0.25
+topaneu_center4_ct_002,center4,ct,50,L-5.3 M1-M2 junction,saccular,1221,56.45,5.74,4.76,Medium (5-10mm),238.5,159.3,138.1,0.43,0.43,0.25
+topaneu_center4_ct_005,center4,ct,29,L-3.4 ICA C7-Pcom-junction,saccular,1847,85.37,7.19,5.46,Medium (5-10mm),186.3,147.3,181.1,0.43,0.43,0.25
+topaneu_center4_ct_008_1,center4,ct,47,R-5.2 M1 early bifurcation,saccular,442,20.43,4.34,3.39,Small (3-5mm),98.2,155.3,199.8,0.43,0.43,0.25
+topaneu_center4_ct_008_2,center4,ct,47,R-5.2 M1 early bifurcation,saccular,626,28.94,4.54,3.81,Small (3-5mm),98.8,154.6,199.0,0.43,0.43,0.25
+topaneu_center4_ct_009,center4,ct,48,L-5.2 M1 early bifurcation,saccular,748,34.42,6.11,4.04,Medium (5-10mm),228.1,126.5,244.5,0.429,0.429,0.25
+topaneu_center4_ct_012,center4,ct,36,4.1 Acom complex,saccular,380,14.45,4.26,3.02,Small (3-5mm),165.4,145.0,185.3,0.39,0.39,0.25
+topaneu_center4_ct_019,center4,ct,29,L-3.4 ICA C7-Pcom-junction,saccular,2282,105.47,10.27,5.86,Large (>10mm),198.0,178.0,171.9,0.43,0.43,0.25
+topaneu_center4_ct_020_1,center4,ct,36,4.1 Acom complex,saccular,1776,82.11,6.78,5.39,Medium (5-10mm),183.5,134.5,213.5,0.43,0.43,0.25
+topaneu_center4_ct_020_2,center4,ct,36,4.1 Acom complex,saccular,2386,109.78,7.83,5.94,Medium (5-10mm),181.0,136.2,206.5,0.429,0.429,0.25
+topaneu_center4_ct_020_3,center4,ct,36,4.1 Acom complex,saccular,1798,83.13,6.51,5.41,Medium (5-10mm),179.1,133.9,216.4,0.43,0.43,0.25
+topaneu_center4_ct_023,center4,ct,32,R-3.6 ICA C7-nonBranch,saccular,144,6.66,4.07,2.33,Small (3-5mm),122.9,163.0,209.1,0.43,0.43,0.25
+topaneu_center4_ct_025_1,center4,ct,49,R-5.3 M1-M2 junction,saccular,1147,53.03,6.64,4.66,Medium (5-10mm),94.6,121.5,191.5,0.43,0.43,0.25
+topaneu_center4_ct_025_2,center4,ct,49,R-5.3 M1-M2 junction,saccular,1354,62.3,6.74,4.92,Medium (5-10mm),91.9,124.6,174.6,0.429,0.429,0.25
+topaneu_center4_ct_025_2,center4,ct,50,L-5.3 M1-M2 junction,saccular,3378,155.42,7.9,6.67,Medium (5-10mm),235.0,119.2,171.5,0.429,0.429,0.25
+topaneu_center4_ct_030,center4,ct,36,4.1 Acom complex,saccular,407,18.82,3.97,3.3,Small (3-5mm),171.6,144.9,192.0,0.43,0.43,0.25
+topaneu_center4_ct_034_1,center4,ct,28,R-3.4 ICA C7-Pcom-junction,saccular,2058,86.49,7.88,5.49,Medium (5-10mm),122.3,138.1,205.6,0.41,0.41,0.25
+topaneu_center4_ct_034_2,center4,ct,28,R-3.4 ICA C7-Pcom-junction,saccular,596,32.91,5.01,3.98,Medium (5-10mm),119.2,144.9,129.3,0.429,0.429,0.3
+topaneu_center4_ct_037,center4,ct,36,4.1 Acom complex,saccular,904,41.79,5.12,4.31,Medium (5-10mm),174.3,146.8,224.1,0.43,0.43,0.25
+topaneu_center4_ct_041,center4,ct,28,R-3.4 ICA C7-Pcom-junction,saccular,21397,813.62,17.24,11.58,Large (>10mm),128.4,189.1,217.7,0.39,0.39,0.25
+topaneu_center4_ct_042_1,center4,ct,50,L-5.3 M1-M2 junction,saccular,229,10.53,3.4,2.72,Small (3-5mm),247.0,139.9,156.2,0.429,0.429,0.25
+topaneu_center4_ct_042_2,center4,ct,47,R-5.2 M1 early bifurcation,saccular,1466,67.44,7.47,5.05,Medium (5-10mm),106.7,130.5,220.8,0.429,0.429,0.25
+topaneu_center4_ct_042_2,center4,ct,50,L-5.3 M1-M2 junction,saccular,626,28.8,5.09,3.8,Medium (5-10mm),249.4,143.2,171.3,0.429,0.429,0.25
+topaneu_center4_ct_045,center4,ct,27,L-3.3 ICA C6-nonOA,saccular,1695,78.35,7.15,5.31,Medium (5-10mm),178.0,148.5,171.2,0.43,0.43,0.25
+topaneu_center4_ct_047,center4,ct,49,R-5.3 M1-M2 junction,saccular,2150,99.38,9.13,5.75,Medium (5-10mm),75.7,137.3,181.0,0.43,0.43,0.25
+topaneu_center4_ct_048,center4,ct,50,L-5.3 M1-M2 junction,saccular,1242,57.14,7.61,4.78,Medium (5-10mm),263.5,181.1,208.1,0.429,0.429,0.25
+topaneu_center4_ct_051_1,center4,ct,36,4.1 Acom complex,saccular,1798,83.11,6.86,5.41,Medium (5-10mm),149.7,150.6,182.7,0.43,0.43,0.25
+topaneu_center4_ct_051_2,center4,ct,36,4.1 Acom complex,saccular,1399,77.6,6.75,5.29,Medium (5-10mm),147.1,154.4,134.1,0.43,0.43,0.3
+topaneu_center4_ct_055,center4,ct,5,R-1.3 VA-PICA junction,saccular,4062,187.77,9.93,7.1,Medium (5-10mm),130.8,242.1,128.0,0.43,0.43,0.25
+topaneu_center4_ct_057,center4,ct,48,L-5.2 M1 early bifurcation,saccular,1360,62.87,6.01,4.93,Medium (5-10mm),205.2,142.7,213.0,0.43,0.43,0.25
+topaneu_center4_ct_059,center4,ct,30,R-3.5 ICA C7-AChA-junction,saccular,408,18.86,5.04,3.3,Medium (5-10mm),151.3,165.2,201.6,0.43,0.43,0.25
+topaneu_center4_ct_059,center4,ct,32,R-3.6 ICA C7-nonBranch,saccular,1581,73.09,5.64,5.19,Medium (5-10mm),134.7,165.6,224.7,0.43,0.43,0.25
+topaneu_center4_ct_060,center4,ct,17,1.10 BA tip,saccular,923,42.67,5.07,4.34,Medium (5-10mm),160.9,182.6,244.9,0.43,0.43,0.25
+topaneu_center4_ct_060,center4,ct,36,4.1 Acom complex,saccular,2828,130.72,8.51,6.3,Medium (5-10mm),154.7,128.5,193.3,0.43,0.43,0.25
+topaneu_center4_ct_062_1,center4,ct,49,R-5.3 M1-M2 junction,saccular,1486,56.51,6.45,4.76,Medium (5-10mm),102.6,167.8,174.7,0.39,0.39,0.25
+topaneu_center4_ct_062_1,center4,ct,50,L-5.3 M1-M2 junction,saccular,1459,55.48,6.04,4.73,Medium (5-10mm),284.2,152.3,218.9,0.39,0.39,0.25
+topaneu_center4_ct_062_2,center4,ct,49,R-5.3 M1-M2 junction,saccular,1337,61.52,6.17,4.9,Medium (5-10mm),100.4,145.5,170.5,0.429,0.429,0.25
+topaneu_center4_ct_063,center4,ct,29,L-3.4 ICA C7-Pcom-junction,saccular,64343,2446.63,20.15,16.72,Large (>10mm),200.6,189.4,198.4,0.39,0.39,0.25
+topaneu_center4_ct_064,center4,ct,36,4.1 Acom complex,saccular,855,32.51,5.59,3.96,Medium (5-10mm),188.9,154.7,254.3,0.39,0.39,0.25
+topaneu_center4_ct_065,center4,ct,49,R-5.3 M1-M2 junction,saccular,895,34.03,6.37,4.02,Medium (5-10mm),99.1,124.2,209.1,0.39,0.39,0.25
+topaneu_center4_ct_067,center4,ct,36,4.1 Acom complex,saccular,1655,76.51,7.19,5.27,Medium (5-10mm),178.0,154.8,190.6,0.43,0.43,0.25
+topaneu_center4_ct_070,center4,ct,36,4.1 Acom complex,saccular,885,40.72,7.15,4.27,Medium (5-10mm),157.5,142.4,176.2,0.429,0.429,0.25
+topaneu_center4_ct_072,center4,ct,28,R-3.4 ICA C7-Pcom-junction,saccular,3888,179.72,8.9,7.0,Medium (5-10mm),129.8,163.5,185.6,0.43,0.43,0.25
+topaneu_center4_ct_074,center4,ct,27,L-3.3 ICA C6-nonOA,saccular,486,22.47,4.0,3.5,Small (3-5mm),187.5,164.7,148.9,0.43,0.43,0.25
+topaneu_center4_ct_074,center4,ct,29,L-3.4 ICA C7-Pcom-junction,saccular,41746,1929.82,18.42,15.45,Large (>10mm),195.5,187.4,186.5,0.43,0.43,0.25
+topaneu_center4_ct_083,center4,ct,16,L-1.9 BA-SCA junction,saccular,398,15.13,3.58,3.07,Small (3-5mm),184.7,202.4,245.9,0.39,0.39,0.25
+topaneu_center4_ct_083,center4,ct,30,R-3.5 ICA C7-AChA-junction,saccular,288,10.95,3.75,2.76,Small (3-5mm),144.7,160.3,241.8,0.39,0.39,0.25
+topaneu_center4_ct_083,center4,ct,31,L-3.5 ICA C7-AChA-junction,saccular,1135,43.16,5.03,4.35,Medium (5-10mm),217.4,177.7,223.6,0.39,0.39,0.25
+topaneu_center4_ct_083,center4,ct,35,L-3.7 ICA C7-terminus,saccular,29719,1130.06,21.74,12.92,Large (>10mm),211.4,154.9,257.9,0.39,0.39,0.25
+topaneu_center4_ct_087,center4,ct,36,4.1 Acom complex,saccular,2234,206.53,11.23,7.33,Large (>10mm),162.8,135.5,100.6,0.43,0.43,0.5
+topaneu_center4_ct_093,center4,ct,17,1.10 BA tip,saccular,2807,259.51,9.53,7.91,Medium (5-10mm),170.3,170.7,130.7,0.43,0.43,0.5
+topaneu_center4_ct_094,center4,ct,49,R-5.3 M1-M2 junction,saccular,2637,100.27,8.04,5.76,Medium (5-10mm),108.1,156.9,155.6,0.39,0.39,0.25
+topaneu_center4_ct_097,center4,ct,28,R-3.4 ICA C7-Pcom-junction,saccular,8128,375.72,11.92,8.95,Large (>10mm),123.8,157.8,172.3,0.43,0.43,0.25
+topaneu_center4_ct_097,center4,ct,49,R-5.3 M1-M2 junction,saccular,177,8.18,3.04,2.5,Small (3-5mm),75.7,122.2,174.6,0.43,0.43,0.25
+topaneu_center4_ct_101,center4,ct,29,L-3.4 ICA C7-Pcom-junction,saccular,3664,139.32,10.24,6.43,Large (>10mm),226.6,191.6,174.1,0.39,0.39,0.25
+topaneu_center4_ct_101,center4,ct,49,R-5.3 M1-M2 junction,saccular,498,18.94,4.08,3.31,Small (3-5mm),84.1,131.4,198.5,0.39,0.39,0.25
+topaneu_center4_ct_102,center4,ct,43,R-4.5 Distal ACA branches,saccular,3910,180.75,28.78,7.02,Large (>10mm),185.3,102.8,329.1,0.43,0.43,0.25
+topaneu_center4_ct_102,center4,ct,44,L-4.5 Distal ACA branches,saccular,326,15.07,3.56,3.06,Small (3-5mm),202.7,69.9,247.6,0.43,0.43,0.25
+topaneu_center4_ct_103,center4,ct,32,R-3.6 ICA C7-nonBranch,fusiform,50937,2354.35,28.59,16.51,Large (>10mm),133.7,180.4,193.0,0.43,0.43,0.25
+topaneu_center4_ct_104,center4,ct,23,L-3.1 ICA infraclinoid C1-C5,saccular,820,31.18,4.83,3.9,Small (3-5mm),221.3,185.1,150.1,0.39,0.39,0.25
+topaneu_center4_ct_104,center4,ct,33,L-3.6 ICA C7-nonBranch,saccular,983,37.38,5.93,4.15,Medium (5-10mm),209.2,187.5,171.2,0.39,0.39,0.25
+topaneu_center4_ct_105,center4,ct,50,L-5.3 M1-M2 junction,saccular,461,21.21,5.19,3.43,Medium (5-10mm),229.0,138.2,208.7,0.429,0.429,0.25
+topaneu_center4_ct_106,center4,ct,36,4.1 Acom complex,saccular,1105,51.08,6.75,4.6,Medium (5-10mm),166.7,141.2,220.9,0.43,0.43,0.25
+topaneu_center4_ct_107,center4,ct,48,L-5.2 M1 early bifurcation,saccular,2175,100.09,7.53,5.76,Medium (5-10mm),224.9,151.4,204.1,0.429,0.429,0.25
+topaneu_center4_ct_108,center4,ct,28,R-3.4 ICA C7-Pcom-junction,saccular,528,24.41,3.99,3.6,Small (3-5mm),120.0,161.0,184.5,0.43,0.43,0.25
+topaneu_center4_ct_108,center4,ct,33,L-3.6 ICA C7-nonBranch,saccular,2071,95.74,7.19,5.68,Medium (5-10mm),177.0,171.2,187.4,0.43,0.43,0.25
+topaneu_center4_ct_115,center4,ct,28,R-3.4 ICA C7-Pcom-junction,saccular,6895,382.45,11.82,9.01,Large (>10mm),113.2,167.7,126.0,0.43,0.43,0.3
+topaneu_center4_ct_116,center4,ct,33,L-3.6 ICA C7-nonBranch,saccular,553,25.23,5.46,3.64,Medium (5-10mm),218.6,185.7,87.1,0.39,0.39,0.3
+topaneu_center4_ct_119,center4,ct,36,4.1 Acom complex,saccular,1749,97.01,7.4,5.7,Medium (5-10mm),151.1,131.8,151.3,0.43,0.43,0.3
+topaneu_center4_ct_122,center4,ct,49,R-5.3 M1-M2 junction,saccular,972,53.66,5.92,4.68,Medium (5-10mm),72.3,130.9,167.2,0.429,0.429,0.3
+topaneu_center4_ct_127,center4,ct,1,R-1.1 VA trunk,dissecting,6872,379.4,21.88,8.98,Large (>10mm),167.0,256.0,58.1,0.429,0.429,0.3
+topaneu_center4_ct_129,center4,ct,15,R-1.9 BA-SCA junction,saccular,2763,126.07,7.85,6.22,Medium (5-10mm),187.0,197.1,193.9,0.39,0.39,0.3
+topaneu_center4_ct_134,center4,ct,29,L-3.4 ICA C7-Pcom-junction,fusiform,8334,460.12,14.5,9.58,Large (>10mm),177.2,132.7,152.2,0.429,0.429,0.3
+topaneu_center4_ct_134,center4,ct,31,L-3.5 ICA C7-AChA-junction,saccular,566,31.25,4.72,3.91,Small (3-5mm),184.6,141.3,175.3,0.429,0.429,0.3
+topaneu_center4_ct_140,center4,ct,23,L-3.1 ICA infraclinoid C1-C5,fusiform,43002,1962.1,20.61,15.53,Large (>10mm),210.2,153.4,114.2,0.39,0.39,0.3
+topaneu_center4_ct_193,center4,ct,32,R-3.6 ICA C7-nonBranch,fusiform,62614,3456.92,22.21,18.76,Large (>10mm),146.3,152.4,189.3,0.429,0.429,0.3
+topaneu_center4_ct_200,center4,ct,4,L-1.2 PICA trunk,fusiform,4942,225.49,11.77,7.55,Large (>10mm),207.6,283.2,101.8,0.39,0.39,0.3
+topaneu_center4_ct_201,center4,ct,1,R-1.1 VA trunk,dissecting,1473,96.78,13.32,5.7,Large (>10mm),237.9,251.2,112.9,0.468,0.468,0.3
+topaneu_center5_mr_007,center5,mr,8,1.5 VA-BA junction,fusiform,13672,1498.64,25.57,14.2,Large (>10mm),182.1,233.6,67.8,0.446,0.446,0.55
+topaneu_center5_mr_009,center5,mr,7,1.4 BA trunk,fusiform,77705,4463.44,31.59,20.43,Large (>10mm),289.8,405.0,91.5,0.286,0.286,0.7
+topaneu_center5_mr_010,center5,mr,2,L-1.1 VA trunk,fusiform,99025,10199.25,37.91,26.91,Large (>10mm),282.0,315.3,60.4,0.391,0.391,0.675
+topaneu_center5_mr_011,center5,mr,7,1.4 BA trunk,fusiform,44779,4612.09,26.94,20.65,Large (>10mm),274.5,266.5,66.5,0.391,0.391,0.675
+topaneu_center5_mr_015,center5,mr,2,L-1.1 VA trunk,fusiform,2517,259.24,12.21,7.91,Large (>10mm),249.1,290.6,22.7,0.391,0.391,0.675
+topaneu_center5_mr_016,center5,mr,7,1.4 BA trunk,fusiform,64761,6670.18,27.86,23.35,Large (>10mm),243.6,243.5,49.8,0.391,0.391,0.675
+topaneu_center5_mr_021,center5,mr,2,L-1.1 VA trunk,fusiform,3463,356.68,15.27,8.8,Large (>10mm),278.7,293.2,23.6,0.391,0.391,0.675
+topaneu_center5_mr_022,center5,mr,7,1.4 BA trunk,fusiform,92147,9490.85,37.03,26.27,Large (>10mm),274.5,283.3,51.2,0.391,0.391,0.675
+topaneu_center5_mr_023,center5,mr,8,1.5 VA-BA junction,fusiform,8451,450.76,13.0,9.51,Large (>10mm),231.3,372.7,102.2,0.286,0.286,0.65
+topaneu_center5_mr_024,center5,mr,7,1.4 BA trunk,fusiform,15591,908.91,13.35,12.02,Large (>10mm),307.5,399.2,96.1,0.299,0.299,0.65
+topaneu_center5_mr_025,center5,mr,2,L-1.1 VA trunk,fusiform,1262,129.98,8.33,6.28,Medium (5-10mm),272.2,280.6,40.8,0.391,0.391,0.675
+topaneu_center5_mr_027,center5,mr,1,R-1.1 VA trunk,fusiform,1425,146.77,9.24,6.54,Medium (5-10mm),263.6,275.3,41.9,0.391,0.391,0.675
+topaneu_center5_mr_028,center5,mr,2,L-1.1 VA trunk,fusiform,2274,111.96,8.07,5.98,Medium (5-10mm),383.5,445.6,42.3,0.286,0.286,0.6
+topaneu_center5_mr_029,center5,mr,2,L-1.1 VA trunk,fusiform,3125,342.54,13.2,8.68,Large (>10mm),221.4,227.0,38.3,0.446,0.446,0.55
+topaneu_center5_mr_030,center5,mr,2,L-1.1 VA trunk,fusiform,2185,239.51,10.42,7.71,Large (>10mm),211.4,246.9,13.6,0.446,0.446,0.55
+topaneu_center5_mr_031,center5,mr,1,R-1.1 VA trunk,fusiform,3794,415.88,14.98,9.26,Large (>10mm),196.9,250.8,37.4,0.446,0.446,0.55
+topaneu_center5_mr_032,center5,mr,1,R-1.1 VA trunk,fusiform,2379,245.03,10.09,7.76,Large (>10mm),267.4,275.2,38.0,0.391,0.391,0.675
+topaneu_center5_mr_033,center5,mr,1,R-1.1 VA trunk,fusiform,4535,467.09,17.02,9.63,Large (>10mm),238.5,301.8,30.9,0.391,0.391,0.675
+topaneu_center5_mr_034,center5,mr,2,L-1.1 VA trunk,fusiform,7673,790.29,20.83,11.47,Large (>10mm),278.0,324.9,23.6,0.391,0.391,0.675
+topaneu_center5_mr_036,center5,mr,7,1.4 BA trunk,fusiform,4401,482.41,15.3,9.73,Large (>10mm),201.1,225.7,27.4,0.446,0.446,0.55
+topaneu_center5_mr_037,center5,mr,8,1.5 VA-BA junction,fusiform,16717,1721.8,37.5,14.87,Large (>10mm),231.3,263.8,64.3,0.391,0.391,0.675
+topaneu_center5_mr_038,center5,mr,1,R-1.1 VA trunk,fusiform,10393,1139.22,14.79,12.96,Large (>10mm),208.5,244.8,49.2,0.446,0.446,0.55
+topaneu_center5_mr_039,center5,mr,8,1.5 VA-BA junction,fusiform,8882,973.59,23.33,12.3,Large (>10mm),193.2,222.4,32.7,0.446,0.446,0.55
+topaneu_center5_mr_041,center5,mr,1,R-1.1 VA trunk,dissecting,4088,201.27,10.15,7.27,Large (>10mm),298.0,400.4,35.2,0.286,0.286,0.6
+topaneu_center5_mr_052,center5,mr,1,R-1.1 VA trunk,saccular,11296,502.04,12.01,9.86,Large (>10mm),191.0,298.1,41.9,0.333,0.333,0.4
+topaneu_center5_mr_061,center5,mr,17,1.10 BA tip,saccular,2520,112.0,7.51,5.98,Medium (5-10mm),240.2,238.0,59.5,0.333,0.333,0.4
+topaneu_center5_mr_061,center5,mr,22,R-3.1 ICA infraclinoid C1-C5,dissecting,1626,72.27,7.61,5.17,Medium (5-10mm),209.2,208.1,48.8,0.333,0.333,0.4
+topaneu_center5_mr_061,center5,mr,23,L-3.1 ICA infraclinoid C1-C5,saccular,131,5.82,2.57,2.23,Very Small (<3mm),281.7,186.8,53.4,0.333,0.333,0.4
+topaneu_center5_mr_061,center5,mr,49,R-5.3 M1-M2 junction,saccular,123,5.47,3.19,2.19,Small (3-5mm),159.2,177.9,74.0,0.333,0.333,0.4
+topaneu_center5_mr_063,center5,mr,39,R-4.3 A2,fusiform,5257,233.64,9.01,7.64,Medium (5-10mm),237.9,178.9,73.7,0.333,0.333,0.4
+topaneu_center5_mr_068,center5,mr,2,L-1.1 VA trunk,fusiform,4955,220.22,11.54,7.49,Large (>10mm),238.9,255.4,85.3,0.333,0.333,0.4
+topaneu_center5_mr_074,center5,mr,7,1.4 BA trunk,fusiform,35571,1580.93,21.3,14.45,Large (>10mm),203.8,278.9,67.1,0.333,0.333,0.4
+topaneu_center5_mr_079,center5,mr,7,1.4 BA trunk,fusiform,19980,888.0,17.73,11.93,Large (>10mm),213.2,236.6,110.9,0.333,0.333,0.4
+topaneu_center5_mr_081,center5,mr,2,L-1.1 VA trunk,fusiform,37098,1648.8,21.36,14.66,Large (>10mm),216.5,290.1,40.6,0.333,0.333,0.4
+topaneu_center5_mr_082,center5,mr,8,1.5 VA-BA junction,fusiform,3738,166.13,10.68,6.82,Large (>10mm),186.5,287.7,96.6,0.333,0.333,0.4
+topaneu_center5_mr_451,center5,mr,37,R-4.2 A1,saccular,642,26.34,4.91,3.69,Small (3-5mm),219.3,191.1,126.7,0.286,0.286,0.5
+topaneu_center5_mr_452,center5,mr,41,R-4.4 A3,saccular,683,26.26,4.73,3.69,Small (3-5mm),309.3,208.9,91.8,0.234,0.234,0.7
+topaneu_center5_mr_453,center5,mr,50,L-5.3 M1-M2 junction,saccular,547,21.03,4.32,3.42,Small (3-5mm),440.8,239.3,92.0,0.234,0.234,0.7
+topaneu_center5_mr_454,center5,mr,39,R-4.3 A2,saccular,631,132.1,7.95,6.32,Medium (5-10mm),116.7,117.4,76.0,0.547,0.547,0.7
+topaneu_center5_mr_455,center5,mr,36,4.1 Acom complex,saccular,1064,40.91,5.9,4.28,Medium (5-10mm),297.9,269.7,87.6,0.234,0.234,0.7
+topaneu_center5_mr_457,center5,mr,37,R-4.2 A1,saccular,8168,305.35,9.65,8.35,Medium (5-10mm),219.8,207.2,121.2,0.273,0.273,0.5
+topaneu_center5_mr_457,center5,mr,49,R-5.3 M1-M2 junction,saccular,162,6.06,2.57,2.26,Very Small (<3mm),141.3,193.6,116.6,0.273,0.273,0.5
+topaneu_center5_mr_458,center5,mr,17,1.10 BA tip,saccular,214,44.8,5.23,4.41,Medium (5-10mm),123.8,135.3,83.2,0.547,0.547,0.7
+topaneu_center5_mr_458,center5,mr,22,R-3.1 ICA infraclinoid C1-C5,fusiform,48,10.05,3.42,2.68,Small (3-5mm),114.3,103.5,62.7,0.547,0.547,0.7
+topaneu_center5_mr_459,center5,mr,23,L-3.1 ICA infraclinoid C1-C5,saccular,1908,93.94,7.33,5.64,Medium (5-10mm),278.6,187.2,83.2,0.286,0.286,0.6
+topaneu_center5_mr_460,center5,mr,33,L-3.6 ICA C7-nonBranch,saccular,1379,56.58,7.2,4.76,Medium (5-10mm),287.6,235.7,86.7,0.286,0.286,0.5
+topaneu_center5_mr_461,center5,mr,49,R-5.3 M1-M2 junction,saccular,1415,54.41,6.01,4.7,Medium (5-10mm),182.0,267.7,73.2,0.234,0.234,0.7
+topaneu_center5_mr_462,center5,mr,7,1.4 BA trunk,saccular,737,30.24,5.47,3.87,Medium (5-10mm),234.4,232.1,94.2,0.286,0.286,0.5
+topaneu_center5_mr_464,center5,mr,41,R-4.4 A3,saccular,1714,70.32,11.3,5.12,Large (>10mm),261.2,133.8,172.5,0.286,0.286,0.5
+topaneu_center5_mr_464,center5,mr,42,L-4.4 A3,fusiform,1315,53.95,6.91,4.69,Medium (5-10mm),273.1,136.5,148.2,0.286,0.286,0.5
+topaneu_center5_mr_465,center5,mr,25,L-3.2 ICA C6-OA-junction,saccular,415,17.03,4.02,3.19,Small (3-5mm),255.1,193.9,105.5,0.286,0.286,0.5
+topaneu_center5_mr_466,center5,mr,25,L-3.2 ICA C6-OA-junction,saccular,373,78.09,7.25,5.3,Medium (5-10mm),162.5,99.5,70.9,0.547,0.547,0.7
+topaneu_center5_mr_467,center5,mr,36,4.1 Acom complex,saccular,997,40.91,5.95,4.27,Medium (5-10mm),273.6,218.1,120.5,0.286,0.286,0.5
+topaneu_center5_mr_469,center5,mr,27,L-3.3 ICA C6-nonOA,saccular,1932,72.23,6.99,5.17,Medium (5-10mm),263.8,202.3,95.3,0.273,0.273,0.5
+topaneu_center5_mr_470,center5,mr,27,L-3.3 ICA C6-nonOA,saccular,66,13.82,3.62,2.98,Small (3-5mm),135.4,102.0,67.5,0.547,0.547,0.7
+topaneu_center5_mr_471,center5,mr,50,L-5.3 M1-M2 junction,saccular,2922,123.31,7.69,6.18,Medium (5-10mm),455.5,285.4,103.8,0.246,0.246,0.7
+topaneu_center5_mr_472,center5,mr,23,L-3.1 ICA infraclinoid C1-C5,dissecting,36124,7562.61,33.49,24.35,Large (>10mm),169.4,126.7,50.9,0.547,0.547,0.7
+topaneu_center5_mr_473,center5,mr,41,R-4.4 A3,saccular,694,145.29,8.57,6.52,Medium (5-10mm),120.3,57.3,124.1,0.547,0.547,0.7
+topaneu_center5_mr_474,center5,mr,30,R-3.5 ICA C7-AChA-junction,saccular,728,29.87,5.04,3.85,Medium (5-10mm),213.1,253.6,104.0,0.286,0.286,0.5
+topaneu_center5_mr_475,center5,mr,49,R-5.3 M1-M2 junction,saccular,644,24.08,4.44,3.58,Small (3-5mm),91.6,198.8,101.1,0.273,0.273,0.5
+topaneu_center5_mr_476,center5,mr,27,L-3.3 ICA C6-nonOA,saccular,193,40.4,5.62,4.26,Medium (5-10mm),139.8,112.1,67.8,0.547,0.547,0.7
+topaneu_center5_mr_478,center5,mr,2,L-1.1 VA trunk,dissecting,702062,26995.67,60.37,37.22,Large (>10mm),318.4,443.8,40.6,0.234,0.234,0.7
+topaneu_center5_mr_479,center5,mr,50,L-5.3 M1-M2 junction,saccular,332,12.77,4.32,2.9,Small (3-5mm),426.8,212.6,85.7,0.234,0.234,0.7
+topaneu_center5_mr_480,center5,mr,5,R-1.3 VA-PICA junction,saccular,374,57.52,5.39,4.79,Medium (5-10mm),133.8,193.2,35.5,0.469,0.469,0.7
+topaneu_center5_mr_480,center5,mr,47,R-5.2 M1 early bifurcation,saccular,320,49.22,5.26,4.55,Medium (5-10mm),85.9,133.7,66.0,0.469,0.469,0.7
+topaneu_center5_mr_481,center5,mr,26,R-3.3 ICA C6-nonOA,saccular,568,21.84,4.67,3.47,Small (3-5mm),256.1,255.9,72.9,0.234,0.234,0.7
+topaneu_center5_mr_481,center5,mr,33,L-3.6 ICA C7-nonBranch,saccular,207,7.96,3.33,2.48,Small (3-5mm),339.5,293.7,71.6,0.234,0.234,0.7
+topaneu_center5_mr_484,center5,mr,38,L-4.2 A1,saccular,120,25.12,5.27,3.63,Medium (5-10mm),132.6,118.4,91.5,0.547,0.547,0.7
+topaneu_center5_mr_485,center5,mr,36,4.1 Acom complex,saccular,109,16.77,4.08,3.18,Small (3-5mm),152.8,124.6,91.2,0.469,0.469,0.7
+topaneu_center5_mr_486,center5,mr,33,L-3.6 ICA C7-nonBranch,saccular,46,9.63,4.33,2.64,Small (3-5mm),148.6,111.1,68.4,0.547,0.547,0.7
+topaneu_center5_mr_486,center5,mr,49,R-5.3 M1-M2 junction,saccular,116,24.28,5.23,3.59,Medium (5-10mm),67.1,94.9,76.4,0.547,0.547,0.7
+topaneu_center5_mr_487,center5,mr,22,R-3.1 ICA infraclinoid C1-C5,saccular,190,7.1,2.67,2.38,Very Small (<3mm),241.2,246.9,86.4,0.273,0.273,0.5
+topaneu_center5_mr_487,center5,mr,34,R-3.7 ICA C7-terminus,saccular,608,22.73,4.16,3.51,Small (3-5mm),214.5,228.9,113.1,0.273,0.273,0.5
+topaneu_center5_mr_488,center5,mr,38,L-4.2 A1,saccular,62,9.54,3.27,2.63,Small (3-5mm),174.2,149.5,85.2,0.469,0.469,0.7
+topaneu_center5_mr_489,center5,mr,41,R-4.4 A3,saccular,183,38.31,5.44,4.18,Medium (5-10mm),131.4,57.6,122.5,0.547,0.547,0.7
+topaneu_center5_mr_490,center5,mr,49,R-5.3 M1-M2 junction,saccular,442,19.22,4.43,3.32,Small (3-5mm),142.1,183.0,109.6,0.286,0.286,0.53
+topaneu_center5_mr_491,center5,mr,49,R-5.3 M1-M2 junction,saccular,370,15.18,3.9,3.07,Small (3-5mm),147.1,173.6,120.7,0.286,0.286,0.5
+topaneu_center5_mr_492,center5,mr,34,R-3.7 ICA C7-terminus,saccular,168,6.89,3.04,2.36,Small (3-5mm),197.5,225.2,130.5,0.286,0.286,0.5
