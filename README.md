@@ -62,10 +62,9 @@ Branch A: 3D ResNet                      Branch B: Graph Attention Network (GAT)
 
 ## 📂 Repository Structure
 
-```text
-├── 0th_review_new.pptx       # Review 0 Project Presentation
-├── implementation_plan.md    # Detailed technical execution & architecture roadmap
-├── configs/                  # Hyperparameter and experiment configurations
+├── ROADMAP.md                # Detailed Phase-by-Phase Developer Roadmap & Guide for Teammates
+├── walkthrough.md            # Live progress log & verification results for all completed phases
+├── configs/                  # Hyperparameter, data splits & experiment configurations
 ├── src/
 │   ├── data/                 # NIfTI loaders, patch extractors, augmentations
 │   ├── topology/             # Skeletonization, graph builders, edge/node feature extractors
