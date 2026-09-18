@@ -105,3 +105,48 @@ RUNNING DATA PIPELINE UNIT TESTS
 ```
 
 All Phase 2 deliverables are committed and pushed to GitHub.
+
+---
+
+## 🧠 Phase 3: 3D CNN Baseline (ResNet-18)
+
+### 1. Architecture
+- [`src/models/resnet3d.py`](src/models/resnet3d.py): 3D ResNet-18 encoder on $64\times64\times64$ patches, 512-d visual embedding $\mathbf{z}_{\text{vis}}$.
+- Multi-task heads:
+  - Aneurysm probability (logit + sigmoid)
+  - 3D centroid offset $(\Delta x, \Delta y, \Delta z)$ in voxels
+  - Physical diameter $\hat{D}_{\text{max}}$ (mm, ReLU)
+- [`src/models/losses.py`](src/models/losses.py): Focal Loss ($\alpha=0.25$, $\gamma=2.0$) + Smooth L1 offset/size on **positive** candidates only.
+
+### 2. Trainer
+- [`src/models/trainer.py`](src/models/trainer.py): AdamW, CUDA AMP (`torch.amp.autocast` + `GradScaler`), AUROC / sensitivity / specificity / diameter MAE, early stopping, checkpoint `checkpoints/best_baseline_resnet3d.pt`.
+- Dataset now returns `offset_voxel` so the offset head has a defined training target (positive jitter vs true centroid).
+
+### 3. Automated Verification
+Executed [`tests/test_model_baseline.py`](tests/test_model_baseline.py) on this machine (Python 3.14, PyTorch 2.11.0+cu128, NVIDIA GeForce RTX 4080 Laptop GPU):
+```text
+============================================================
+RUNNING PHASE 3 BASELINE MODEL UNIT TESTS
+============================================================
+[PASS] ResNet-18 3D trainable parameters: 33,142,341
+[PASS] Forward/backward on cpu | loss=6.0649
+[PASS] Forward/backward on cuda | loss=5.6756
+[PASS] Offset/size losses ignore negative candidates
+============================================================
+```
+
+### 4. Real-data smoke train
+Dataset download from Hugging Face (`SlaYeRRRRRdwdd/topaneu`) is complete: 416 images, location masks, type masks, vessel masks, and location JSONs under `dataset(topAneu)/`.
+
+```text
+Device: cuda | AMP: True | Train patches: 8 | Val patches: 4
+Epoch 001/1 | train_loss=5.2871 | val_loss=5.2136 | AUROC=n/a | Sens=1.000 | Spec=0.000 | diam_MAE=5.667 mm
+```
+
+AUROC is undefined on the 4-sample smoke split when only one class is present. Full training:
+
+```bash
+py -3.14 -m src.models.trainer --epochs 50
+```
+
+Phase 3 implementation is complete. Next: Phase 4 vascular skeletonization and graph construction.

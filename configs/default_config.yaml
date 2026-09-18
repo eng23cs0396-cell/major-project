@@ -51,7 +51,7 @@ model:
   cnn:
     backbone: "resnet18_3d" # options: "resnet18_3d", "resnet34_3d"
     in_channels: 1
-    embedding_dim: 256
+    embedding_dim: 512
     dropout: 0.2
 
   # Branch B: Graph Attention Network

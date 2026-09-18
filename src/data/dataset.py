@@ -19,7 +19,7 @@ class AneurysmPatchDataset(Dataset):
     def __init__(
         self,
         split_csv: str,
-        eda_summary_csv: Optional[str] = None,
+        eda_summary_csv: Optional[str] = "artifacts/eda/aneurysm_annotations_summary.csv",
         dataset_root: str = "dataset(topAneu)",
         preprocessor: Optional[VolumetricPreprocessor] = None,
         neg_pos_ratio: float = 2.0, # 2 negative vessel patches per positive patch
@@ -104,28 +104,33 @@ class AneurysmPatchDataset(Dataset):
         # Normalize intensity
         norm_vol = self.preprocessor.normalize_intensity(vol_data, modality)
 
-        # Determine center voxel
+        # Determine patch center. Jitter positives here so the offset head has a defined target.
         if sample["is_aneurysm"] == 1:
-            center_voxel = sample["centroid_voxel"]
+            true_centroid = np.array(sample["centroid_voxel"], dtype=np.float32)
+            center_voxel = true_centroid.copy()
+            if self.jitter_range > 0:
+                jitter = np.random.randint(-self.jitter_range, self.jitter_range + 1, size=3)
+                center_voxel = center_voxel + jitter
+            offset_voxel = true_centroid - center_voxel
+            center_voxel = tuple(int(v) for v in np.round(center_voxel))
         else:
-            # Sample negative point from vessel mask
             vessel_path = os.path.join(self.vessel_masks_dir, f"{scan_id}.nii.gz")
             if os.path.exists(vessel_path):
                 vessel_data = nib.load(vessel_path).get_fdata()
                 vessel_pts = np.argwhere(vessel_data > 0)
                 if len(vessel_pts) > 0:
-                    center_voxel = tuple(vessel_pts[np.random.choice(len(vessel_pts))])
+                    center_voxel = tuple(int(v) for v in vessel_pts[np.random.choice(len(vessel_pts))])
                 else:
-                    center_voxel = tuple(np.array(vol_data.shape) // 2)
+                    center_voxel = tuple(int(v) for v in (np.array(vol_data.shape) // 2))
             else:
-                center_voxel = tuple(np.array(vol_data.shape) // 2)
+                center_voxel = tuple(int(v) for v in (np.array(vol_data.shape) // 2))
+            offset_voxel = np.zeros(3, dtype=np.float32)
 
-        # Extract 3D patch
         vol_patch, mask_patch = self.preprocessor.extract_patch(
             norm_vol,
             center_voxel=center_voxel,
             mask=mask_data,
-            jitter_range=self.jitter_range
+            jitter_range=0,
         )
 
         # Convert to PyTorch tensors with channel dimension (C, D, H, W)
@@ -142,5 +147,6 @@ class AneurysmPatchDataset(Dataset):
             "modality": modality,
             "center": sample["center"],
             "scan_id": scan_id,
-            "centroid_voxel": torch.tensor(center_voxel, dtype=torch.float32)
+            "centroid_voxel": torch.tensor(center_voxel, dtype=torch.float32),
+            "offset_voxel": torch.tensor(offset_voxel, dtype=torch.float32),
         }

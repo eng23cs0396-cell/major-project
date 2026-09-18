@@ -92,6 +92,8 @@ def test_dataset_loader():
     assert "size_mm" in sample
     assert sample["patch"].shape == (1, 64, 64, 64), f"Unexpected patch shape: {sample['patch'].shape}"
     assert sample["patch"].dtype == torch.float32
+    assert "offset_voxel" in sample
+    assert sample["offset_voxel"].shape == (3,)
     print(f"[PASS] PyTorch Dataset loading verified! Patch tensor shape: {sample['patch'].shape}")
 
 

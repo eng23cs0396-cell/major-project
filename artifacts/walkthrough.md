@@ -105,3 +105,19 @@ RUNNING DATA PIPELINE UNIT TESTS
 ```
 
 All Phase 2 deliverables are committed and pushed to GitHub.
+
+---
+
+## 🧠 Phase 3: 3D CNN Baseline (ResNet-18)
+
+Implemented `src/models/resnet3d.py`, `src/models/losses.py`, `src/models/trainer.py`, and `tests/test_model_baseline.py`.
+
+```text
+[PASS] ResNet-18 3D trainable parameters: 33,142,341
+[PASS] Forward/backward on cpu
+[PASS] Forward/backward on cuda
+[PASS] Offset/size losses ignore negative candidates
+```
+
+Real-data AMP smoke train on CUDA completed. Checkpoint: `checkpoints/best_baseline_resnet3d.pt`. Full 50-epoch training: `py -3.14 -m src.models.trainer --epochs 50`.
+
