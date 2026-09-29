@@ -135,18 +135,18 @@ RUNNING PHASE 3 BASELINE MODEL UNIT TESTS
 ============================================================
 ```
 
-### 4. Real-data smoke train
-Dataset download from Hugging Face (`SlaYeRRRRRdwdd/topaneu`) is complete: 416 images, location masks, type masks, vessel masks, and location JSONs under `dataset(topAneu)/`.
+### 4. Phase 3 v2 Optimizations & Enhancements
+Identified and resolved 5 critical items in `phase-3-v2`:
+1. **Dataloader Bottleneck Elimination**: Added in-memory patch caching (`cache_patches=True`) in [`src/data/dataset.py`](src/data/dataset.py), avoiding redundant 3D NIfTI file decompression across epochs.
+2. **Deterministic Validation**: Negative vessel coordinates are fixed upon initialization rather than resampled at each epoch, yielding stable and reproducible validation metrics.
+3. **Negative Sampling Contamination Guard**: Vessel coordinates within 20 voxels of any true aneurysm are filtered out to prevent false-negative label noise.
+4. **3D Spatial Augmentations**: Sagittal, coronal, and axial random 3D flips with synchronized offset vector adjustments implemented for training.
+5. **Cosine Learning Rate Schedule**: Added `CosineAnnealingLR` in [`src/models/trainer.py`](src/models/trainer.py) along with saving both `best_baseline_resnet3d.pt` and `last_baseline_resnet3d.pt`.
 
-```text
-Device: cuda | AMP: True | Train patches: 8 | Val patches: 4
-Epoch 001/1 | train_loss=5.2871 | val_loss=5.2136 | AUROC=n/a | Sens=1.000 | Spec=0.000 | diam_MAE=5.667 mm
-```
-
-AUROC is undefined on the 4-sample smoke split when only one class is present. Full training:
-
+Full training command (using virtual environment with CUDA GPU):
 ```bash
-py -3.14 -m src.models.trainer --epochs 50
+.venv\Scripts\python -m src.models.trainer --epochs 50
 ```
 
-Phase 3 implementation is complete. Next: Phase 4 vascular skeletonization and graph construction.
+Phase 3 v2 implementation is verified and complete. Next: Phase 4 vascular skeletonization and graph construction.
+

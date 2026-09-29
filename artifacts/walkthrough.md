@@ -119,5 +119,8 @@ Implemented `src/models/resnet3d.py`, `src/models/losses.py`, `src/models/traine
 [PASS] Offset/size losses ignore negative candidates
 ```
 
-Real-data AMP smoke train on CUDA completed. Checkpoint: `checkpoints/best_baseline_resnet3d.pt`. Full 50-epoch training: `py -3.14 -m src.models.trainer --epochs 50`.
+Real-data AMP smoke train on CUDA completed. Checkpoint: `checkpoints/best_baseline_resnet3d.pt`. 
+
+Phase 3 v2 optimizations implemented: in-memory patch caching, deterministic validation, 3D flip augmentations, false-negative contamination guard, and CosineAnnealingLR. Full 50-epoch training: `.venv\Scripts\python -m src.models.trainer --epochs 50`.
+
 

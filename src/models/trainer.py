@@ -2,8 +2,8 @@
 Mixed-precision trainer for the Phase 3 3D ResNet baseline.
 
 Usage:
-  py -3.14 -m src.models.trainer
-  py -3.14 -m src.models.trainer --epochs 1 --max-train-samples 8 --max-val-samples 4
+  .venv\\Scripts\\python -m src.models.trainer
+  .venv\\Scripts\\python -m src.models.trainer --epochs 1 --max-train-samples 8 --max-val-samples 4
 """
 
 from __future__ import annotations
@@ -162,6 +162,7 @@ def run_training(args: argparse.Namespace) -> Dict[str, float]:
         dataset_root=args.dataset_root,
         is_training=True,
         neg_pos_ratio=args.neg_pos_ratio,
+        cache_patches=args.cache_patches,
     )
     val_ds = AneurysmPatchDataset(
         split_csv=args.val_split,
@@ -169,6 +170,7 @@ def run_training(args: argparse.Namespace) -> Dict[str, float]:
         dataset_root=args.dataset_root,
         is_training=False,
         neg_pos_ratio=args.neg_pos_ratio,
+        cache_patches=args.cache_patches,
     )
     train_ds = maybe_subset(train_ds, args.max_train_samples)
     val_ds = maybe_subset(val_ds, args.max_val_samples)
@@ -202,6 +204,11 @@ def run_training(args: argparse.Namespace) -> Dict[str, float]:
         lr=args.lr,
         weight_decay=float(cfg.get("training", {}).get("weight_decay", 1e-5)),
     )
+    scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(
+        optimizer,
+        T_max=args.epochs,
+        eta_min=1e-6,
+    )
     scaler = torch.amp.GradScaler("cuda", enabled=use_amp)
 
     os.makedirs(args.checkpoint_dir, exist_ok=True)
@@ -211,12 +218,23 @@ def run_training(args: argparse.Namespace) -> Dict[str, float]:
     patience = int(cfg.get("training", {}).get("early_stopping_patience", 10))
     stale = 0
 
-    print(f"Device: {device} | AMP: {use_amp} | Train patches: {len(train_ds)} | Val patches: {len(val_ds)}")
+    print(
+        f"Device: {device} | AMP: {use_amp} | Cache: {args.cache_patches} | "
+        f"Train patches: {len(train_ds)} | Val patches: {len(val_ds)}"
+    )
 
     for epoch in range(1, args.epochs + 1):
         train_stats = train_one_epoch(model, train_loader, criterion, optimizer, scaler, device, use_amp)
         val_stats = evaluate(model, val_loader, criterion, device, use_amp)
-        row = {"epoch": epoch, **{f"train_{k}": v for k, v in train_stats.items()}, **val_stats}
+        scheduler.step()
+        curr_lr = scheduler.get_last_lr()[0]
+
+        row = {
+            "epoch": epoch,
+            "lr": curr_lr,
+            **{f"train_{k}": v for k, v in train_stats.items()},
+            **val_stats,
+        }
         history.append(row)
         auroc = val_stats.get("auroc", float("nan"))
         auroc_str = f"{auroc:.4f}" if auroc == auroc else "n/a"
@@ -224,7 +242,8 @@ def run_training(args: argparse.Namespace) -> Dict[str, float]:
             f"Epoch {epoch:03d}/{args.epochs} | "
             f"train_loss={train_stats['loss']:.4f} | val_loss={val_stats['val_loss']:.4f} | "
             f"AUROC={auroc_str} | Sens={val_stats['sensitivity']:.3f} | "
-            f"Spec={val_stats['specificity']:.3f} | diam_MAE={val_stats['diameter_mae_mm']:.3f} mm"
+            f"Spec={val_stats['specificity']:.3f} | diam_MAE={val_stats['diameter_mae_mm']:.3f} mm | "
+            f"lr={curr_lr:.2e}"
         )
 
         finite_auroc = auroc == auroc
@@ -237,11 +256,24 @@ def run_training(args: argparse.Namespace) -> Dict[str, float]:
         else:
             improved = False
 
+        # Always save last checkpoint
+        last_ckpt_path = os.path.join(args.checkpoint_dir, "last_baseline_resnet3d.pt")
+        torch.save(
+            {
+                "epoch": epoch,
+                "model_state_dict": model.state_dict(),
+                "optimizer_state_dict": optimizer.state_dict(),
+                "val_metrics": val_stats,
+                "config": cfg,
+            },
+            last_ckpt_path,
+        )
+
         if improved:
             best_auroc = auroc if finite_auroc else best_auroc
             best_metrics = val_stats
             stale = 0
-            ckpt_path = os.path.join(args.checkpoint_dir, "best_baseline_resnet3d.pt")
+            best_ckpt_path = os.path.join(args.checkpoint_dir, "best_baseline_resnet3d.pt")
             torch.save(
                 {
                     "epoch": epoch,
@@ -250,9 +282,9 @@ def run_training(args: argparse.Namespace) -> Dict[str, float]:
                     "val_metrics": val_stats,
                     "config": cfg,
                 },
-                ckpt_path,
+                best_ckpt_path,
             )
-            print(f"  saved {ckpt_path}")
+            print(f"  saved {best_ckpt_path}")
         else:
             stale += 1
             if stale >= patience:
@@ -276,13 +308,15 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--epochs", type=int, default=None)
     parser.add_argument("--batch-size", type=int, default=None)
     parser.add_argument("--lr", type=float, default=None)
-    parser.add_argument("--num-workers", type=int, default=0)
+    parser.add_argument("--num-workers", type=int, default=None)
     parser.add_argument("--neg-pos-ratio", type=float, default=1.0)
     parser.add_argument("--lambda-offset", type=float, default=1.0)
     parser.add_argument("--lambda-size", type=float, default=1.0)
     parser.add_argument("--max-train-samples", type=int, default=None)
     parser.add_argument("--max-val-samples", type=int, default=None)
     parser.add_argument("--device", default="auto")
+    parser.add_argument("--cache-patches", action="store_true", default=True, help="Cache patches in RAM")
+    parser.add_argument("--no-cache-patches", action="store_false", dest="cache_patches")
     args = parser.parse_args()
 
     cfg = load_config(args.config)
@@ -293,6 +327,13 @@ def parse_args() -> argparse.Namespace:
         args.batch_size = int(train_cfg.get("batch_size", 4))
     if args.lr is None:
         args.lr = float(train_cfg.get("learning_rate", 1e-4))
+    if args.num_workers is None:
+        args.num_workers = int(train_cfg.get("num_workers", 0))
+
+    # On Windows, num_workers=0 avoids process spawn overhead when in-memory cache is used
+    if os.name == "nt" and args.cache_patches and args.num_workers > 0:
+        args.num_workers = 0
+
     return args
 
 

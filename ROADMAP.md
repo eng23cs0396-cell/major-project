@@ -63,16 +63,17 @@ Purely visual 3D CNNs suffer high false-positive rates on small lesions because 
 
 #### How to Run & Verify:
 ```bash
-py -3.14 -m pytest tests/test_model_baseline.py -v
-py -3.14 -m src.models.trainer --epochs 50
+.venv\Scripts\python -m pytest tests/test_model_baseline.py -v
+.venv\Scripts\python -m src.models.trainer --epochs 50
 ```
 
 Smoke check with a tiny subset (does not replace full training):
 ```bash
-py -3.14 -m src.models.trainer --epochs 1 --batch-size 2 --max-train-samples 8 --max-val-samples 4
+.venv\Scripts\python -m src.models.trainer --epochs 1 --batch-size 2 --max-train-samples 8 --max-val-samples 4
 ```
 
-Checkpoints are written to `checkpoints/best_baseline_resnet3d.pt`.
+Checkpoints are written to `checkpoints/best_baseline_resnet3d.pt` and `checkpoints/last_baseline_resnet3d.pt`.
+
 
 ---
 

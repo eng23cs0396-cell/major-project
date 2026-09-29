@@ -66,7 +66,8 @@ class VolumetricPreprocessor:
         volume: np.ndarray,
         center_voxel: Tuple[int, int, int],
         mask: Optional[np.ndarray] = None,
-        jitter_range: int = 0
+        jitter_range: int = 0,
+        patch_size: Optional[Tuple[int, int, int]] = None
     ) -> Tuple[np.ndarray, Optional[np.ndarray]]:
         """
         Extract a 3D patch of shape (D, H, W) centered at `center_voxel`.
@@ -79,7 +80,8 @@ class VolumetricPreprocessor:
             cy += np.random.randint(-jitter_range, jitter_range + 1)
             cz += np.random.randint(-jitter_range, jitter_range + 1)
 
-        pd_x, pd_y, pd_z = self.patch_size
+        target_size = patch_size or self.patch_size
+        pd_x, pd_y, pd_z = target_size
         hx, hy, hz = pd_x // 2, pd_y // 2, pd_z // 2
 
         # Desired slice boundaries
@@ -105,6 +107,8 @@ class VolumetricPreprocessor:
             padded_vol = np.pad(volume, pad_width, mode="edge")
             if mask is not None:
                 padded_mask = np.pad(mask, pad_width, mode="constant", constant_values=0)
+            else:
+                padded_mask = None
         else:
             padded_vol = volume
             padded_mask = mask
@@ -120,5 +124,6 @@ class VolumetricPreprocessor:
         vol_patch = padded_vol[xs:xe, ys:ye, zs:ze]
         mask_patch = padded_mask[xs:xe, ys:ye, zs:ze] if padded_mask is not None else None
 
-        assert vol_patch.shape == self.patch_size, f"Patch shape mismatch: {vol_patch.shape} vs {self.patch_size}"
+        assert vol_patch.shape == target_size, f"Patch shape mismatch: {vol_patch.shape} vs {target_size}"
         return vol_patch, mask_patch
+
