@@ -27,8 +27,8 @@ Purely visual 3D CNNs suffer high false-positive rates on small lesions because 
 | **Phase 1** | **Environment & Project Architecture** | ✅ **COMPLETED** | Python 3.10 venv, PyTorch 2.5.1 + CUDA 12.1 (RTX 4060 GPU), PyG, MONAI, NiBabel, SimpleITK, `tests/test_environment.py`. |
 | **Phase 2** | **Data Pipeline, Splitting & Size Profiling** | ✅ **COMPLETED** | Patient-stratified splits (293 train / 62 val / 61 test / 62 Center-4 holdout), physical size profiler (41.1% $\le 5\text{ mm}$), modality preprocessor (MRA & CTA), `tests/test_data_pipeline.py`. |
 | **Phase 3** | **3D CNN Baseline Model (ResNet3D)** | ✅ **COMPLETED** | 3D ResNet-18 backbone, multi-task heads (classification, 3D offset, diameter), mixed-precision trainer, `tests/test_model_baseline.py`. |
-| **Phase 4** | **Vascular Topology (Skeleton & Graph)** | 🚀 **NEXT** | 3D medial axis thinning, branch-point detection, PyTorch Geometric arterial graph builder, $k$-hop subgraph extractor, `tests/test_topology.py`. |
-| **Phase 5** | **GAT & Multimodal Cross-Attention Fusion** | ⏳ *Planned* | GATv2 graph encoder, Cross-Attention fusion block, end-to-end dual-branch architecture, `tests/test_fusion_model.py`. |
+| **Phase 4** | **Vascular Topology (Skeleton & Graph)** | ✅ **COMPLETED** | 3D medial axis thinning, branch-point detection, PyTorch Geometric arterial graph builder, $k$-hop subgraph extractor, `tests/test_topology.py`. |
+| **Phase 5** | **GAT & Multimodal Cross-Attention Fusion** | 🚀 **NEXT** | GATv2 graph encoder, Cross-Attention fusion block, end-to-end dual-branch architecture, `tests/test_fusion_model.py`. |
 | **Phase 6** | **Full-Scan Detector, 3D-NMS & FROC Evaluation**| ⏳ *Planned* | Skeleton candidate proposer, 3D Non-Maximum Suppression, FROC curves (sensitivity @ 0.5, 1.0, 2.0 FPs/scan), size-stratified validation (<3mm, 3-5mm, >5mm), Center-4 zero-shot generalization. |
 | **Phase 7** | **Interactive Clinical UI & Decision Support** | ⏳ *Planned* | Web-based diagnostic dashboard (MRA/CTA scan viewer, 3D aneurysm localization with coordinates, diameter, risk assessment, and exportable clinical summary report). |
 
