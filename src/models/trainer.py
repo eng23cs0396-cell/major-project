@@ -61,11 +61,35 @@ def classification_metrics(y_true: np.ndarray, y_prob: np.ndarray, threshold: fl
         "auroc": binary_auroc(y_true, y_prob),
         "sensitivity": float(sensitivity),
         "specificity": float(specificity),
+        "threshold": float(threshold),
         "tp": tp,
         "tn": tn,
         "fp": fp,
         "fn": fn,
     }
+
+
+def metrics_at_youden(y_true: np.ndarray, y_prob: np.ndarray) -> Dict[str, float]:
+    """Sensitivity and specificity at the threshold that maximizes sens + spec - 1."""
+    at_half = classification_metrics(y_true, y_prob, threshold=0.5)
+    if y_true.min() == y_true.max() or len(y_prob) == 0:
+        at_half["sensitivity_op"] = at_half["sensitivity"]
+        at_half["specificity_op"] = at_half["specificity"]
+        at_half["threshold_op"] = 0.5
+        return at_half
+
+    best_j = -1.0
+    best = at_half
+    for threshold in np.unique(y_prob):
+        candidate = classification_metrics(y_true, y_prob, threshold=float(threshold))
+        youden = candidate["sensitivity"] + candidate["specificity"] - 1.0
+        if youden > best_j:
+            best_j = youden
+            best = candidate
+    at_half["sensitivity_op"] = best["sensitivity"]
+    at_half["specificity_op"] = best["specificity"]
+    at_half["threshold_op"] = best["threshold"]
+    return at_half
 
 
 def load_config(path: str) -> dict:
@@ -77,6 +101,15 @@ def maybe_subset(dataset, max_samples: Optional[int]):
     if max_samples is None or max_samples >= len(dataset):
         return dataset
     return Subset(dataset, list(range(max_samples)))
+
+
+def preload_patches(dataset, name: str) -> None:
+    base = dataset.dataset if isinstance(dataset, Subset) else dataset
+    indices = list(dataset.indices) if isinstance(dataset, Subset) else None
+    if not getattr(base, "cache_patches", False):
+        return
+    print(f"Writing {name} patches to disk (scans are not kept in memory)...")
+    base.warm_cache(indices)
 
 
 def _unpack_batch(batch: dict, device: torch.device):
@@ -108,6 +141,8 @@ def train_one_epoch(
             outputs = model(patches)
             losses = criterion(outputs, labels, offsets, sizes)
         scaler.scale(losses["loss"]).backward()
+        scaler.unscale_(optimizer)
+        torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
         scaler.step(optimizer)
         scaler.update()
         for key in running:
@@ -143,7 +178,7 @@ def evaluate(model, loader, criterion, device: torch.device, use_amp: bool) -> D
 
     y_true_np = np.asarray(y_true, dtype=np.int32)
     y_prob_np = np.asarray(y_prob, dtype=np.float32)
-    metrics = classification_metrics(y_true_np, y_prob_np)
+    metrics = metrics_at_youden(y_true_np, y_prob_np)
     metrics["val_loss"] = running_loss / max(1, n_batches)
     metrics["diameter_mae_mm"] = float(np.mean(size_err)) if size_err else float("nan")
     return metrics
@@ -174,6 +209,8 @@ def run_training(args: argparse.Namespace) -> Dict[str, float]:
     )
     train_ds = maybe_subset(train_ds, args.max_train_samples)
     val_ds = maybe_subset(val_ds, args.max_val_samples)
+    preload_patches(train_ds, "train")
+    preload_patches(val_ds, "val")
 
     train_loader = DataLoader(
         train_ds,
@@ -198,7 +235,11 @@ def run_training(args: argparse.Namespace) -> Dict[str, float]:
         dropout=float(model_cfg.get("dropout", 0.2)),
     ).to(device)
 
-    criterion = MultiTaskDetectionLoss(lambda_offset=args.lambda_offset, lambda_size=args.lambda_size)
+    criterion = MultiTaskDetectionLoss(
+        lambda_offset=args.lambda_offset,
+        lambda_size=args.lambda_size,
+        focal_alpha=args.focal_alpha,
+    )
     optimizer = torch.optim.AdamW(
         model.parameters(),
         lr=args.lr,
@@ -212,18 +253,43 @@ def run_training(args: argparse.Namespace) -> Dict[str, float]:
     scaler = torch.amp.GradScaler("cuda", enabled=use_amp)
 
     os.makedirs(args.checkpoint_dir, exist_ok=True)
+    history_path = os.path.join(args.checkpoint_dir, "baseline_train_history.json")
     best_auroc = -1.0
     best_metrics: Dict[str, float] = {}
-    history = []
-    patience = int(cfg.get("training", {}).get("early_stopping_patience", 10))
+    history: List[dict] = []
+    start_epoch = 1
+    if args.resume:
+        ckpt = torch.load(args.resume, map_location=device, weights_only=False)
+        model.load_state_dict(ckpt["model_state_dict"])
+        optimizer.load_state_dict(ckpt["optimizer_state_dict"])
+        start_epoch = int(ckpt["epoch"]) + 1
+        scheduler.last_epoch = int(ckpt["epoch"])
+        if use_amp and "scaler_state_dict" in ckpt:
+            scaler.load_state_dict(ckpt["scaler_state_dict"])
+        if os.path.exists(history_path):
+            with open(history_path, "r", encoding="utf-8") as handle:
+                payload = json.load(handle)
+            history = list(payload.get("history", []))
+            best_metrics = dict(payload.get("best") or {})
+            saved_auroc = best_metrics.get("auroc")
+            if isinstance(saved_auroc, (int, float)) and saved_auroc == saved_auroc:
+                best_auroc = float(saved_auroc)
+        print(f"Resumed {args.resume} after epoch {ckpt['epoch']} (next epoch {start_epoch})")
+
+    patience = args.patience if args.patience is not None else int(cfg.get("training", {}).get("early_stopping_patience", 10))
     stale = 0
 
     print(
         f"Device: {device} | AMP: {use_amp} | Cache: {args.cache_patches} | "
-        f"Train patches: {len(train_ds)} | Val patches: {len(val_ds)}"
+        f"Train patches: {len(train_ds)} | Val patches: {len(val_ds)} | "
+        f"Epochs {start_epoch}-{args.epochs}"
     )
 
-    for epoch in range(1, args.epochs + 1):
+    if start_epoch > args.epochs:
+        print(f"Training already finished {args.epochs} epochs.")
+        return best_metrics
+
+    for epoch in range(start_epoch, args.epochs + 1):
         train_stats = train_one_epoch(model, train_loader, criterion, optimizer, scaler, device, use_amp)
         val_stats = evaluate(model, val_loader, criterion, device, use_amp)
         scheduler.step()
@@ -241,8 +307,9 @@ def run_training(args: argparse.Namespace) -> Dict[str, float]:
         print(
             f"Epoch {epoch:03d}/{args.epochs} | "
             f"train_loss={train_stats['loss']:.4f} | val_loss={val_stats['val_loss']:.4f} | "
-            f"AUROC={auroc_str} | Sens={val_stats['sensitivity']:.3f} | "
-            f"Spec={val_stats['specificity']:.3f} | diam_MAE={val_stats['diameter_mae_mm']:.3f} mm | "
+            f"AUROC={auroc_str} | Sens@0.5={val_stats['sensitivity']:.3f} | "
+            f"Sens@op={val_stats['sensitivity_op']:.3f} (t={val_stats['threshold_op']:.2f}) | "
+            f"Spec@op={val_stats['specificity_op']:.3f} | diam_MAE={val_stats['diameter_mae_mm']:.3f} mm | "
             f"lr={curr_lr:.2e}"
         )
 
@@ -265,6 +332,7 @@ def run_training(args: argparse.Namespace) -> Dict[str, float]:
                 "optimizer_state_dict": optimizer.state_dict(),
                 "val_metrics": val_stats,
                 "config": cfg,
+                "scaler_state_dict": scaler.state_dict(),
             },
             last_ckpt_path,
         )
@@ -281,17 +349,17 @@ def run_training(args: argparse.Namespace) -> Dict[str, float]:
                     "optimizer_state_dict": optimizer.state_dict(),
                     "val_metrics": val_stats,
                     "config": cfg,
+                    "scaler_state_dict": scaler.state_dict(),
                 },
                 best_ckpt_path,
             )
             print(f"  saved {best_ckpt_path}")
         else:
             stale += 1
-            if stale >= patience:
+            if patience > 0 and stale >= patience:
                 print(f"Early stopping after {epoch} epochs (patience={patience}).")
                 break
 
-    history_path = os.path.join(args.checkpoint_dir, "baseline_train_history.json")
     with open(history_path, "w", encoding="utf-8") as handle:
         json.dump({"history": history, "best": best_metrics}, handle, indent=2)
     return best_metrics
@@ -306,16 +374,19 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--eda-csv", default="artifacts/eda/aneurysm_annotations_summary.csv")
     parser.add_argument("--checkpoint-dir", default="checkpoints")
     parser.add_argument("--epochs", type=int, default=None)
+    parser.add_argument("--resume", default=None, help="Checkpoint to continue from")
+    parser.add_argument("--patience", type=int, default=None, help="Early-stopping patience; 0 runs every epoch")
     parser.add_argument("--batch-size", type=int, default=None)
     parser.add_argument("--lr", type=float, default=None)
     parser.add_argument("--num-workers", type=int, default=None)
     parser.add_argument("--neg-pos-ratio", type=float, default=1.0)
-    parser.add_argument("--lambda-offset", type=float, default=1.0)
-    parser.add_argument("--lambda-size", type=float, default=1.0)
+    parser.add_argument("--lambda-offset", type=float, default=0.1)
+    parser.add_argument("--lambda-size", type=float, default=0.1)
+    parser.add_argument("--focal-alpha", type=float, default=0.75)
     parser.add_argument("--max-train-samples", type=int, default=None)
     parser.add_argument("--max-val-samples", type=int, default=None)
     parser.add_argument("--device", default="auto")
-    parser.add_argument("--cache-patches", action="store_true", default=True, help="Cache patches in RAM")
+    parser.add_argument("--cache-patches", action="store_true", default=True, help="Cache patches on disk")
     parser.add_argument("--no-cache-patches", action="store_false", dest="cache_patches")
     args = parser.parse_args()
 
@@ -330,8 +401,8 @@ def parse_args() -> argparse.Namespace:
     if args.num_workers is None:
         args.num_workers = int(train_cfg.get("num_workers", 0))
 
-    # On Windows, num_workers=0 avoids process spawn overhead when in-memory cache is used
-    if os.name == "nt" and args.cache_patches and args.num_workers > 0:
+    # On Windows, keep loading in the main process. Patches are read from disk.
+    if os.name == "nt" and args.num_workers > 0:
         args.num_workers = 0
 
     return args

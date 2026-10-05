@@ -5,10 +5,7 @@ and candidate Volume-of-Interest (VOI) patch extraction.
 """
 
 import numpy as np
-import torch
-import torch.nn.functional as F
-import nibabel as nib
-from typing import Tuple, Optional, Union
+from typing import Tuple, Optional
 
 
 class VolumetricPreprocessor:
@@ -31,33 +28,80 @@ class VolumetricPreprocessor:
     def normalize_intensity(self, volume: np.ndarray, modality: str) -> np.ndarray:
         """
         Apply modality-specific intensity normalization.
-        - MRA: Percentile clipping on non-zero brain voxels + Z-score standardization
-        - CTA: Hounsfield Unit (HU) windowing [100, 700] for blood vessels + min-max [0, 1]
+
+        - MRA: Percentile clipping on non-zero voxels + Z-score standardization
+        - CTA: Hounsfield Unit (HU) windowing [100, 700] + min-max [0, 1]
         """
-        vol = volume.astype(np.float32)
+        vol = volume.astype(np.float32, copy=True)
         mod = modality.lower()
 
         if "mr" in mod:
-            non_zero = vol[vol > 0]
-            if len(non_zero) > 0:
-                p_low = np.percentile(non_zero, self.mra_lower_pct)
-                p_high = np.percentile(non_zero, self.mra_upper_pct)
-                vol = np.clip(vol, p_low, p_high)
-                
-                # Z-score on brain parenchyma
-                mean = np.mean(vol[vol > 0])
-                std = np.std(vol[vol > 0]) + 1e-6
+            # Create mask once instead of repeatedly doing vol > 0
+            mask = vol > 0
+
+            if np.any(mask):
+                # Percentiles still require extracting non-zero values.
+                # This is only done once.
+                non_zero = vol[mask]
+
+                p_low = np.percentile(
+                    non_zero,
+                    self.mra_lower_pct
+                )
+                p_high = np.percentile(
+                    non_zero,
+                    self.mra_upper_pct
+                )
+
+                # Release the temporary array before allocating more memory
+                del non_zero
+
+                # Clip in-place to reduce memory usage
+                np.clip(vol, p_low, p_high, out=vol)
+
+                # Calculate mean/std using the existing mask
+                values = vol[mask]
+
+                mean = np.mean(values, dtype=np.float64)
+                std = np.std(values, dtype=np.float64) + 1e-6
+
+                del values
+                del mask
+
+                # Z-score
                 vol = (vol - mean) / std
+
             else:
-                vol = (vol - np.mean(vol)) / (np.std(vol) + 1e-6)
-        elif "ct" in mod:
+                mean = np.mean(vol, dtype=np.float64)
+                std = np.std(vol, dtype=np.float64) + 1e-6
+                vol = (vol - mean) / std
+
+            return vol
+
+        if "ct" in mod:
             # Contrast-enhanced vascular window
-            vol = np.clip(vol, self.cta_window_min, self.cta_window_max)
-            vol = (vol - self.cta_window_min) / (self.cta_window_max - self.cta_window_min + 1e-6)
-        else:
-            # Generic Min-Max
-            v_min, v_max = vol.min(), vol.max()
-            vol = (vol - v_min) / (v_max - v_min + 1e-6)
+            np.clip(
+                vol,
+                self.cta_window_min,
+                self.cta_window_max,
+                out=vol
+            )
+
+            vol -= self.cta_window_min
+            vol /= (
+                self.cta_window_max
+                - self.cta_window_min
+                + 1e-6
+            )
+
+            return vol
+
+        # Generic Min-Max
+        v_min = vol.min()
+        v_max = vol.max()
+
+        vol -= v_min
+        vol /= (v_max - v_min + 1e-6)
 
         return vol
 
@@ -121,9 +165,14 @@ class VolumetricPreprocessor:
         zs = z_start + pad_z_before
         ze = zs + pd_z
 
-        vol_patch = padded_vol[xs:xe, ys:ye, zs:ze]
-        mask_patch = padded_mask[xs:xe, ys:ye, zs:ze] if padded_mask is not None else None
+        # Copy the crop so callers can drop the full volume without keeping it alive.
+        vol_patch = np.ascontiguousarray(padded_vol[xs:xe, ys:ye, zs:ze])
+        mask_patch = (
+            np.ascontiguousarray(padded_mask[xs:xe, ys:ye, zs:ze])
+            if padded_mask is not None
+            else None
+        )
 
-        assert vol_patch.shape == target_size, f"Patch shape mismatch: {vol_patch.shape} vs {target_size}"
+        if vol_patch.shape != target_size:
+            raise ValueError(f"Patch shape mismatch: {vol_patch.shape} vs {target_size}")
         return vol_patch, mask_patch
-

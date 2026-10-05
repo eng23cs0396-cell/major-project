@@ -2,7 +2,7 @@ import sys
 import os
 
 def test_python_version():
-    assert sys.version_info >= (3, 10), f"Python 3.10+ required, got {sys.version}"
+    assert sys.version_info[:2] == (3, 10), f"Python 3.10 required, got {sys.version}"
     print(f"[PASS] Python version: {sys.version.split()[0]}")
 
 def test_torch_and_cuda():

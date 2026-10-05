@@ -37,3 +37,4 @@ Thumbs.db
 runs/
 wandb/
 *.log
+artifacts/patch_cache/

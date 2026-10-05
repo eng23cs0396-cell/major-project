@@ -3,6 +3,9 @@ Multi-task losses for the image-only 3D aneurysm baseline.
 
 L_total = L_focal + lambda_offset * L_offset + lambda_size * L_size
 Offset and diameter terms are computed on positive (aneurysm) samples only.
+Focal alpha defaults to 0.75 so aneurysm patches are not under-weighted
+when positives and negatives are sampled evenly.
+Regression weights default below 1 so diameter/offset do not drown classification.
 """
 
 from __future__ import annotations
@@ -15,7 +18,7 @@ import torch.nn.functional as F
 
 
 class BinaryFocalLoss(nn.Module):
-    def __init__(self, alpha: float = 0.25, gamma: float = 2.0, reduction: str = "mean") -> None:
+    def __init__(self, alpha: float = 0.75, gamma: float = 2.0, reduction: str = "mean") -> None:
         super().__init__()
         self.alpha = alpha
         self.gamma = gamma
@@ -38,9 +41,9 @@ class BinaryFocalLoss(nn.Module):
 class MultiTaskDetectionLoss(nn.Module):
     def __init__(
         self,
-        lambda_offset: float = 1.0,
-        lambda_size: float = 1.0,
-        focal_alpha: float = 0.25,
+        lambda_offset: float = 0.1,
+        lambda_size: float = 0.1,
+        focal_alpha: float = 0.75,
         focal_gamma: float = 2.0,
     ) -> None:
         super().__init__()
