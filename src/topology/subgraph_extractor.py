@@ -92,12 +92,11 @@ class VesselSubgraphExtractor:
 
             # Re-index subset
             trimmed_subset = subset[keep_indices]
-            # Use PyG subgraph function to induce edges on the trimmed subset
-            sub_edge_index, edge_mask = subgraph(
+            sub_edge_index, sub_edge_attr = subgraph(
                 subset=trimmed_subset,
                 edge_index=full_graph.edge_index,
+                edge_attr=full_graph.edge_attr,
                 relabel_nodes=True,
-                return_edge_mask=True,
             )
             final_subset = trimmed_subset
             # Find new index of seed
@@ -106,10 +105,9 @@ class VesselSubgraphExtractor:
         else:
             final_subset = subset
             mapped_seed = int(mapping.item()) if hasattr(mapping, "item") else int(mapping[0])
-
+            sub_edge_attr = full_graph.edge_attr[edge_mask] if full_graph.edge_attr is not None else None
         sub_x = full_graph.x[final_subset]
         sub_pos_tensor = full_graph.pos[final_subset]
-        sub_edge_attr = full_graph.edge_attr[edge_mask] if full_graph.edge_attr is not None else None
 
         sub_data = Data(
             x=sub_x,
