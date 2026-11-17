@@ -1,13 +1,9 @@
 ID,Confidence,Diameter (mm),Size Category,"Centroid (X,Y,Z mm)",Anatomical Location,Rupture Risk,Clinical Action
-#1,89.7%,4.15,Small (3-5mm),"(69.7, 60.0, 50.4)",Right Middle Cerebral Artery (MCA) Bifurcation,Moderate,Serial imaging at 6 to 12 months to monitor for morphological enlargement.
-#2,88.7%,3.90,Small (3-5mm),"(77.7, 60.5, 44.8)",Basilar Artery / Vertebrobasilar Junction,Moderate-High,Early repeat angiography (6-12 month MRA/CTA) and outpatient neurointerventional consult.
-#3,88.7%,4.34,Small (3-5mm),"(68.0, 57.3, 57.3)",Right Middle Cerebral Artery (MCA) Bifurcation,Moderate,Serial imaging at 6 to 12 months to monitor for morphological enlargement.
-#4,88.6%,4.43,Small (3-5mm),"(73.5, 54.7, 58.0)",Basilar Artery / Vertebrobasilar Junction,Moderate-High,Early repeat angiography (6-12 month MRA/CTA) and outpatient neurointerventional consult.
-#5,86.8%,3.80,Small (3-5mm),"(60.2, 59.8, 44.8)",Right Middle Cerebral Artery (MCA) Bifurcation,Moderate,Serial imaging at 6 to 12 months to monitor for morphological enlargement.
-#6,84.3%,3.91,Small (3-5mm),"(80.8, 51.2, 44.1)",Basilar Artery / Vertebrobasilar Junction,Moderate-High,Early repeat angiography (6-12 month MRA/CTA) and outpatient neurointerventional consult.
-#7,84.2%,4.01,Small (3-5mm),"(58.0, 65.8, 45.4)",Right Middle Cerebral Artery (MCA) Bifurcation,Moderate,Serial imaging at 6 to 12 months to monitor for morphological enlargement.
-#8,82.3%,5.35,Medium (5-7mm),"(70.3, 61.0, 65.0)",Basilar Artery / Vertebrobasilar Junction,High,Urgent neurosurgical / neurointerventional consultation for elective coiling or clipping.
-#9,81.8%,4.07,Small (3-5mm),"(72.5, 63.8, 55.1)",Basilar Artery / Vertebrobasilar Junction,Moderate-High,Early repeat angiography (6-12 month MRA/CTA) and outpatient neurointerventional consult.
-#10,81.7%,5.84,Medium (5-7mm),"(55.5, 74.7, 53.7)",Right Middle Cerebral Artery (MCA) Bifurcation,High,Urgent neurosurgical / neurointerventional consultation for elective coiling or clipping.
-#11,80.3%,4.23,Small (3-5mm),"(85.1, 70.5, 55.0)",Basilar Artery / Vertebrobasilar Junction,Moderate-High,Early repeat angiography (6-12 month MRA/CTA) and outpatient neurointerventional consult.
-#12,79.8%,4.26,Small (3-5mm),"(57.7, 53.5, 43.4)",Right Middle Cerebral Artery (MCA) Bifurcation,Moderate,Serial imaging at 6 to 12 months to monitor for morphological enlargement.
+#1,89.2%,4.45,Small (3-5mm),"(71.3, 60.8, 54.5)",Basilar Artery / Vertebrobasilar Junction,Moderate-High,Early repeat angiography (6-12 month MRA/CTA) and outpatient neurointerventional consult.
+#2,80.7%,6.87,Medium (5-7mm),"(54.3, 73.7, 51.1)",Right Middle Cerebral Artery (MCA) Bifurcation,High,Urgent neurosurgical / neurointerventional consultation for elective coiling or clipping.
+#3,79.9%,7.80,Large (>7mm),"(82.9, 69.9, 51.8)",Basilar Artery / Vertebrobasilar Junction,Critical,Immediate neurovascular specialist referral. Substantial rupture hazard.
+#4,75.1%,4.02,Small (3-5mm),"(60.5, 58.5, 44.8)",Right Middle Cerebral Artery (MCA) Bifurcation,Moderate,Serial imaging at 6 to 12 months to monitor for morphological enlargement.
+#5,72.8%,5.90,Medium (5-7mm),"(71.6, 82.1, 55.2)",Basilar Artery / Vertebrobasilar Junction,High,Urgent neurosurgical / neurointerventional consultation for elective coiling or clipping.
+#6,60.5%,4.01,Small (3-5mm),"(77.2, 56.8, 44.9)",Basilar Artery / Vertebrobasilar Junction,Moderate-High,Early repeat angiography (6-12 month MRA/CTA) and outpatient neurointerventional consult.
+#7,55.0%,4.77,Small (3-5mm),"(55.5, 60.7, 40.0)",Right Middle Cerebral Artery (MCA) Bifurcation,Moderate,Serial imaging at 6 to 12 months to monitor for morphological enlargement.
+#8,54.6%,5.35,Medium (5-7mm),"(84.5, 56.5, 38.7)",Basilar Artery / Vertebrobasilar Junction,High,Urgent neurosurgical / neurointerventional consultation for elective coiling or clipping.

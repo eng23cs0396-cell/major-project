@@ -165,13 +165,18 @@ def analyze_cerebral_scan(
     detector.nms.score_threshold = effective_conf
 
     # 4. Run Detection Pipeline
-    progress(0.5, desc="Extracting arterial topology & evaluating candidates...")
+    progress(0.40, desc="Extracting arterial topology & evaluating candidates...")
+
+    def progress_adapter(fraction: float, desc: str) -> None:
+        progress(0.40 + 0.45 * fraction, desc=desc)
+
     detections = detector.detect_scan(
         image_volume=img_arr,
         vessel_mask=vessel_arr,
         modality=final_modality,
         spacing=spacing,
         scan_id=scan_id,
+        progress_callback=progress_adapter,
     )
     duration = time.time() - start_time
 

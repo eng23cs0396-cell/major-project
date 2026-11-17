@@ -16,7 +16,7 @@ import sys
 # Ensure repository root is on sys.path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
 
-from typing import Dict, List, Literal, Optional, Tuple, Union
+from typing import Callable, Dict, List, Literal, Optional, Tuple, Union
 import numpy as np
 import nibabel as nib
 import torch
@@ -150,6 +150,7 @@ class ScanDetector:
         modality: str = "mr",
         spacing: Tuple[float, float, float] = (0.5, 0.5, 0.5),
         scan_id: str = "scan_001",
+        progress_callback: Optional[Callable[[float, str], None]] = None,
     ) -> List[Dict]:
         """
         Runs the full detection pipeline on a single 3D volume.
@@ -162,6 +163,7 @@ class ScanDetector:
             modality: 'mr' or 'ct'.
             spacing: Voxel spacing in mm (dx, dy, dz).
             scan_id: Identifier string for caching.
+            progress_callback: Optional callback(fraction, description) for UI progress tracking.
 
         Returns:
             List of detected aneurysms sorted by confidence after 3D-NMS.
@@ -170,6 +172,8 @@ class ScanDetector:
 
         # 0. Automated Brain-Masking & Vessel Filter if no mask is provided
         if vessel_mask is None or not np.any(vessel_mask > 0):
+            if progress_callback:
+                progress_callback(0.05, "Extracting brain cavity & cerebral vasculature...")
             brain_mask = self.preprocessor.extract_brain_mask(image_volume, spacing=spacing, modality=modality)
             vessel_mask = self.preprocessor.extract_automated_vessels(image_volume, brain_mask=brain_mask, spacing=spacing, modality=modality)
 
@@ -177,6 +181,8 @@ class ScanDetector:
         norm_vol = self.preprocessor.normalize_intensity(image_volume, modality=modality)
 
         # 2. Topology Candidate Proposals
+        if progress_callback:
+            progress_callback(0.12, "Proposing arterial bifurcation & centerline sites...")
         candidates = self.proposer.propose_from_mask(vessel_mask, spacing=spacing)
         if not candidates:
             return []
@@ -185,6 +191,8 @@ class ScanDetector:
         scan_graph = None
         scan_tree = None
         if self.model_type == "fusion":
+            if progress_callback:
+                progress_callback(0.18, "Constructing arterial geometric topology graph...")
             scan_graph = self._get_or_build_graph(scan_id, vessel_mask, spacing)
             if scan_graph.pos is not None and scan_graph.num_nodes > 1:
                 from scipy.spatial import KDTree
@@ -193,8 +201,14 @@ class ScanDetector:
         # 4. Batch Patch & Subgraph Extraction
         raw_detections: List[Dict] = []
         num_candidates = len(candidates)
+        total_batches = (num_candidates + self.batch_size - 1) // self.batch_size
 
         for start_idx in range(0, num_candidates, self.batch_size):
+            batch_idx = start_idx // self.batch_size
+            if progress_callback:
+                frac = 0.20 + 0.68 * (start_idx / max(1, num_candidates))
+                progress_callback(frac, f"Evaluating candidate batch {batch_idx + 1}/{total_batches} ({num_candidates} sites)...")
+
             batch_cands = candidates[start_idx : start_idx + self.batch_size]
 
             patch_list: List[torch.Tensor] = []
@@ -280,17 +294,22 @@ class ScanDetector:
                     "diameter_mm": diam_k,
                 })
 
-        # Multi-Candidate Spatial Density & Cluster Agreement
+        # Multi-Candidate Spatial Density & Cluster Agreement via KDTree
         if len(raw_detections) > 1:
+            from scipy.spatial import KDTree
             coords = np.array([d["refined_phys_coord"] for d in raw_detections], dtype=np.float32)
+            c_tree = KDTree(coords)
+            clusters = c_tree.query_ball_point(coords, r=6.0)
+            high_conf_mask = np.array([float(d["aneurysm_prob"]) >= 0.45 for d in raw_detections], dtype=bool)
             for i, det_i in enumerate(raw_detections):
-                dists = np.linalg.norm(coords - det_i["refined_phys_coord"], axis=1)
-                cluster_count = sum(1 for j, d in enumerate(dists) if d <= 6.0 and raw_detections[j]["aneurysm_prob"] >= 0.45)
+                cluster_count = sum(1 for idx in clusters[i] if high_conf_mask[idx])
                 det_i["cluster_density"] = cluster_count
                 if cluster_count == 1 and det_i["aneurysm_prob"] < 0.75:
                     det_i["aneurysm_prob"] = det_i["aneurysm_prob"] * 0.85
 
         # 5. Apply 3D Non-Maximum Suppression
+        if progress_callback:
+            progress_callback(0.92, "Applying 3D-NMS spatial clustering & morphometric filtering...")
         final_detections = self.nms.suppress(
             raw_detections,
             score_key="aneurysm_prob",

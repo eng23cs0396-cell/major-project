@@ -133,45 +133,24 @@ class VolumetricPreprocessor:
         y_start, y_end = int(cy - hy), int(cy + hy)
         z_start, z_end = int(cz - hz), int(cz + hz)
 
-        # Pad boundaries
-        pad_x_before = max(0, -x_start)
-        pad_x_after = max(0, x_end - volume.shape[0])
-        pad_y_before = max(0, -y_start)
-        pad_y_after = max(0, y_end - volume.shape[1])
-        pad_z_before = max(0, -z_start)
-        pad_z_after = max(0, z_end - volume.shape[2])
+        # Allocate output patch directly to eliminate full-volume array padding (prevents GB-scale RAM thrashing)
+        vol_patch = np.zeros(target_size, dtype=np.float32)
+        mask_patch = np.zeros(target_size, dtype=bool) if mask is not None else None
 
-        pad_width = [
-            (pad_x_before, pad_x_after),
-            (pad_y_before, pad_y_after),
-            (pad_z_before, pad_z_after)
-        ]
+        # Overlapping volume boundaries
+        vx_start, vx_end = max(0, x_start), min(volume.shape[0], x_end)
+        vy_start, vy_end = max(0, y_start), min(volume.shape[1], y_end)
+        vz_start, vz_end = max(0, z_start), min(volume.shape[2], z_end)
 
-        if any(p > 0 for pair in pad_width for p in pair):
-            padded_vol = np.pad(volume, pad_width, mode="edge")
-            if mask is not None:
-                padded_mask = np.pad(mask, pad_width, mode="constant", constant_values=0)
-            else:
-                padded_mask = None
-        else:
-            padded_vol = volume
-            padded_mask = mask
+        # Overlapping patch boundaries
+        px_start, px_end = vx_start - x_start, vx_end - x_start
+        py_start, py_end = vy_start - y_start, vy_end - y_start
+        pz_start, pz_end = vz_start - z_start, vz_end - z_start
 
-        # Shifted extraction indices
-        xs = x_start + pad_x_before
-        xe = xs + pd_x
-        ys = y_start + pad_y_before
-        ye = ys + pd_y
-        zs = z_start + pad_z_before
-        ze = zs + pd_z
-
-        # Copy the crop so callers can drop the full volume without keeping it alive.
-        vol_patch = np.ascontiguousarray(padded_vol[xs:xe, ys:ye, zs:ze])
-        mask_patch = (
-            np.ascontiguousarray(padded_mask[xs:xe, ys:ye, zs:ze])
-            if padded_mask is not None
-            else None
-        )
+        if vx_start < vx_end and vy_start < vy_end and vz_start < vz_end:
+            vol_patch[px_start:px_end, py_start:py_end, pz_start:pz_end] = volume[vx_start:vx_end, vy_start:vy_end, vz_start:vz_end]
+            if mask is not None and mask_patch is not None:
+                mask_patch[px_start:px_end, py_start:py_end, pz_start:pz_end] = mask[vx_start:vx_end, vy_start:vy_end, vz_start:vz_end]
 
         if vol_patch.shape != target_size:
             raise ValueError(f"Patch shape mismatch: {vol_patch.shape} vs {target_size}")
@@ -258,7 +237,7 @@ class VolumetricPreprocessor:
         brain_mask: Optional[np.ndarray] = None,
         spacing: Tuple[float, float, float] = (0.5, 0.5, 0.5),
         modality: str = "mr",
-        percentile: float = 98.0,
+        percentile: float = 99.6,
     ) -> np.ndarray:
         """
         Extracts intracranial cerebral arteries directly from a raw scan volume.
@@ -270,7 +249,7 @@ class VolumetricPreprocessor:
             brain_mask: Optional precomputed brain mask. If None, computed on the fly.
             spacing: Physical voxel spacing in mm.
             modality: 'mr' or 'ct'.
-            percentile: Percentile threshold for TOF-MRA high-flow vessel signal.
+            percentile: Percentile threshold for TOF-MRA high-flow vessel signal (default: 99.6).
 
         Returns:
             3D binary arterial mask.
@@ -288,10 +267,10 @@ class VolumetricPreprocessor:
 
         mod = modality.lower()
         if "ct" in mod:
-            # CTA contrast-enhanced vessel window (>150 HU within brain parenchyma)
-            vessel_mask = (masked_vol > 150.0) & brain_mask
+            # CTA contrast-enhanced vessel window [150, 500] HU within brain parenchyma (excludes hyperdense bone)
+            vessel_mask = (masked_vol >= 150.0) & (masked_vol <= 500.0) & brain_mask
         else:
-            # TOF-MRA high-velocity flow void signal
+            # TOF-MRA high-velocity flow void signal (top 0.4% isolates true Circle of Willis arteries)
             thresh = float(np.percentile(intracranial_voxels, percentile))
             vessel_mask = (masked_vol >= thresh) & brain_mask
 
