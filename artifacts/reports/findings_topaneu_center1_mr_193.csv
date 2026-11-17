@@ -1,2 +1,2 @@
 ID,Confidence,Diameter (mm),Size Category,"Centroid (X,Y,Z mm)",Anatomical Location,Rupture Risk,Clinical Action
-—,Normal,—,Normal Caliber,Circle of Willis,No Focal Outpouching Detected,None (Negative),Routine clinical screening; no surgical or interventional referral indicated.
+#1,68.8%,5.52,Medium (5-7mm),"(85.2, 54.0, 63.0)",Basilar Artery / Vertebrobasilar Junction,High,Urgent neurosurgical / neurointerventional consultation for elective coiling or clipping.

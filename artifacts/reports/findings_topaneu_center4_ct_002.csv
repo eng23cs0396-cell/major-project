@@ -1,3 +1,6 @@
 ID,Confidence,Diameter (mm),Size Category,"Centroid (X,Y,Z mm)",Anatomical Location,Rupture Risk,Clinical Action
-#1,74.4%,11.55,Large (>7mm),"(56.7, 73.2, 33.2)",Right Middle Cerebral Artery (MCA) Bifurcation,Critical,Immediate neurovascular specialist referral. Substantial rupture hazard.
-#2,74.4%,11.22,Large (>7mm),"(85.2, 71.1, 30.9)",Basilar Artery / Vertebrobasilar Junction,Critical,Immediate neurovascular specialist referral. Substantial rupture hazard.
+#1,45.8%,10.25,Large (>7mm),"(57.4, 69.4, 32.7)",Right Middle Cerebral Artery (MCA) Bifurcation,Critical,Immediate neurovascular specialist referral. Substantial rupture hazard.
+#2,43.6%,5.54,Medium (5-7mm),"(102.4, 68.1, 35.5)",Basilar Artery / Vertebrobasilar Junction,High,Urgent neurosurgical / neurointerventional consultation for elective coiling or clipping.
+#3,43.2%,4.92,Small (3-5mm),"(56.9, 26.4, 36.5)",Right Middle Cerebral Artery (MCA) Bifurcation,Moderate,Serial imaging at 6 to 12 months to monitor for morphological enlargement.
+#4,42.7%,5.59,Medium (5-7mm),"(48.7, 69.4, 44.7)",Right Middle Cerebral Artery (MCA) Bifurcation,High,Urgent neurosurgical / neurointerventional consultation for elective coiling or clipping.
+#5,42.1%,5.85,Medium (5-7mm),"(73.2, 81.5, 49.5)",Basilar Artery / Vertebrobasilar Junction,High,Urgent neurosurgical / neurointerventional consultation for elective coiling or clipping.

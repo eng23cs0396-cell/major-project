@@ -64,12 +64,12 @@ class ClinicalReportGenerator:
                 - 'recommendation': Actionable radiological recommendation
                 - 'phases_tier': Brief risk explanation
         """
-        if confidence is not None and confidence < 0.50:
+        if confidence is not None and confidence < 0.40:
             return {
                 "category": "Borderline / Low Suspicion",
                 "color": "#64748b",
-                "recommendation": "Sub-threshold finding (confidence < 50%). Likely normal anatomical tortuosity.",
-                "phases_tier": f"Confidence {confidence*100:.0f}% < 50% (Non-actionable)",
+                "recommendation": "Sub-threshold finding (confidence < 40%). Likely normal anatomical tortuosity.",
+                "phases_tier": f"Confidence {confidence*100:.0f}% < 40% (Non-actionable)",
             }
 
         loc_lower = location.lower()

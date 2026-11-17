@@ -98,18 +98,6 @@ def analyze_cerebral_scan(
     # 1. Resolve Input File Paths & Operating Presets
     is_preset = demo_case_key != "📂 Use Custom Upload Below"
 
-    # Resolve Clinical Operating Thresholds (Universal across ALL scans - presets & custom uploads)
-    if "Standard Diagnostic" in clinical_mode:
-        effective_conf = 0.78  # High-specificity screening: eliminates normal bifurcation false alarms
-        effective_nms = 6.0
-    elif "Emergency" in clinical_mode:
-        effective_conf = 0.65  # High-sensitivity ER triage: catches subtle/smaller aneurysms
-        effective_nms = 5.0
-    else:
-        # Research & Engineering Mode (Manual Sliders)
-        effective_conf = conf_threshold
-        effective_nms = nms_distance_mm
-
     if is_preset:
         case_info = PRESET_CASES[demo_case_key]
         img_path = case_info["image"]
@@ -130,6 +118,18 @@ def analyze_cerebral_scan(
         final_modality = "ct"
     else:
         final_modality = detected_modality
+
+    # Resolve Clinical Operating Thresholds (Calibrated by Murray's Morphometric Filter)
+    if "Standard Diagnostic" in clinical_mode:
+        effective_conf = 0.42 if final_modality == "ct" else 0.50
+        effective_nms = 6.0
+    elif "Emergency" in clinical_mode:
+        effective_conf = 0.35 if final_modality == "ct" else 0.40
+        effective_nms = 5.0
+    else:
+        # Research & Engineering Mode (Manual Sliders)
+        effective_conf = conf_threshold
+        effective_nms = nms_distance_mm
 
     progress(0.1, desc="Loading 3D volumetric NIfTI headers...")
     img_nii = nib.load(img_path)
@@ -237,8 +237,8 @@ def analyze_cerebral_scan(
         lesion_choices = ["No lesions detected"]
         selected_choice = "No lesions detected"
 
-    # Count clinically actionable aneurysms (confidence >= 0.50)
-    actionable_count = sum(float(d.get("aneurysm_prob", 0.0)) >= 0.50 for d in detections)
+    # Count clinically actionable aneurysms
+    actionable_count = sum(float(d.get("aneurysm_prob", 0.0)) >= effective_conf for d in detections)
     max_conf = max([float(d.get("aneurysm_prob", 0.0)) for d in detections], default=0.0)
     risk_summary = findings_df["Rupture Risk"].tolist() if not findings_df.empty else []
     highest_risk = "Normal / Negative Scan"
