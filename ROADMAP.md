@@ -29,8 +29,8 @@ Purely visual 3D CNNs suffer high false-positive rates on small lesions because 
 | **Phase 3** | **3D CNN Baseline Model (ResNet3D)** | ✅ **COMPLETED** | 3D ResNet-18 backbone, multi-task heads (classification, 3D offset, diameter), mixed-precision trainer, `tests/test_model_baseline.py`. |
 | **Phase 4** | **Vascular Topology (Skeleton & Graph)** | ✅ **COMPLETED** | 3D medial axis thinning, branch-point detection, PyTorch Geometric arterial graph builder, $k$-hop subgraph extractor, `tests/test_topology.py`. |
 | **Phase 5** | **GAT & Multimodal Cross-Attention Fusion** | ✅ **COMPLETED** | GATv2 graph encoder, Cross-Attention fusion block, end-to-end dual-branch architecture, `tests/test_fusion_model.py`. |
-| **Phase 6** | **Full-Scan Detector, 3D-NMS & FROC Evaluation**| 🚀 **NEXT** | Skeleton candidate proposer, 3D Non-Maximum Suppression, FROC curves (sensitivity @ 0.5, 1.0, 2.0 FPs/scan), size-stratified validation (<3mm, 3-5mm, >5mm), Center-4 zero-shot generalization. |
-| **Phase 7** | **Interactive Clinical UI & Decision Support** | ⏳ *Planned* | Web-based diagnostic dashboard (MRA/CTA scan viewer, 3D aneurysm localization with coordinates, diameter, risk assessment, and exportable clinical summary report). |
+| **Phase 6** | **Full-Scan Detector, 3D-NMS & FROC Evaluation**| ✅ **COMPLETED** | Skeleton candidate proposer, 3D Non-Maximum Suppression, FROC curves (sensitivity @ 0.5, 1.0, 2.0, 3.0, 4.0 FPs/scan), size-stratified validation (<3mm, 3-5mm, >5mm), Center-4 zero-shot generalization, `tests/test_inference.py`. |
+| **Phase 7** | **Interactive Clinical UI & Decision Support** | 🚀 **NEXT** | Web-based diagnostic dashboard (MRA/CTA scan viewer, 3D aneurysm localization with coordinates, diameter, risk assessment, and exportable clinical summary report). |
 
 ---
 
@@ -177,24 +177,30 @@ Checkpoints are written to `checkpoints/best_baseline_resnet3d.pt` and `checkpoi
 
 ---
 
-### 🖥️ Phase 7: Interactive Clinical Decision Support UI & Report Generator
+### 🖥️ Phase 7: Interactive Clinical Decision Support UI & Report Generator [COMPLETED ✅]
 *Goal: Provide a clean, intuitive diagnostic tool for clinicians and demonstration during project reviews.*
 
-#### What Files to Create:
-1. **`src/ui/app.py`**:
-   - Web application (Gradio / Streamlit / Modern Web).
-   - Allows a user/doctor to:
-     1. Upload any patient 3D NIfTI scan (TOF-MRA or CTA).
-     2. Automatic modality detection and intensity normalization.
-     3. Click **"Analyze Cerebral Vasculature"**.
-     4. Display interactive orthogonal 2D slices (Axial, Coronal, Sagittal) with bounding boxes and centroid markers around detected aneurysms.
-     5. Present the **Clinical Findings Table**:
-        - Aneurysm Index (#1, #2, ...)
-        - 3D Centroid Coordinates $(x, y, z)$ in voxel and physical space.
-        - Physical Maximum Diameter in mm (with warning flag if $< 3\text{ mm}$ or $3-5\text{ mm}$).
-        - Anatomical Arterial Location (e.g. ACom, MCA M1 bifurcation, ICA-PCom).
-        - Rupture Risk Category (Low, Moderate, High based on size and location).
-     6. Export formatted PDF / CSV Diagnostic Summary Report.
+#### Completed Deliverables:
+1. **`src/ui/slice_visualizer.py`**:
+   - Multiplanar Reconstruction (MPR) rendering synchronized Axial, Coronal, Sagittal cross-sections centered at any detected lesion.
+   - Radiological intensity windowing (W/L) for both TOF-MRA and CTA.
+   - Whole-brain Maximum Intensity Projection (MIP) overview with candidate markers.
+2. **`src/ui/report_generator.py`**:
+   - PHASES & ISUIA rupture risk score stratification (Low, Moderate, High, Critical).
+   - Anatomical arterial site classification (ACom, MCA, ICA, Basilar, ACA).
+   - Generates downloadable CSV findings and styled printable HTML diagnostic reports.
+3. **`src/ui/app.py`**:
+   - Full Gradio web application with curated clinical presets (MRA positive, CTA positive, healthy control) and custom NIfTI upload.
+   - Dynamic Dual-Expert engine routing (`best_fusion_mra.pt` and `best_fusion_cta.pt`).
+   - Interactive lesion selector, findings dataframe, and report downloads.
+4. **`tests/test_ui.py`**:
+   - 8 unit tests validating windowing, tripartite slice generation, MIP, PHASES risk, HTML reports, and app construction.
+
+#### How to Launch the Web UI:
+```bash
+.venv\Scripts\python src/ui/app.py
+```
+Open browser at `http://127.0.0.1:7860`.
 
 ---
 

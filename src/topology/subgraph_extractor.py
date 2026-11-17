@@ -137,3 +137,6 @@ class VesselSubgraphExtractor:
         )
         dummy.seed_idx = torch.tensor(0, dtype=torch.long)
         return dummy
+
+    # Convenience alias
+    extract_subgraph = extract_subgraph_around_point

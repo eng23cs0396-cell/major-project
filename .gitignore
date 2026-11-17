@@ -39,5 +39,7 @@ wandb/
 *.log
 artifacts/patch_cache/
 artifacts/graph_cache/
+artifacts/scratch/
+artifacts/review_presentation_phases_2_to_4/
 patent/
 walkthrough.html

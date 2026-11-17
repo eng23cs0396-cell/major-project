@@ -1,0 +1,5 @@
+ID,Confidence,Diameter (mm),Size Category,"Centroid (X,Y,Z mm)",Anatomical Location,Rupture Risk,Clinical Action
+#1,84.3%,4.63,Small (3-5mm),"(70.2, 53.8, 74.2)",Basilar Artery / Vertebrobasilar Junction,Moderate-High,Early repeat angiography (6-12 month MRA/CTA) and outpatient neurointerventional consult.
+#2,82.2%,4.89,Small (3-5mm),"(72.2, 58.8, 71.1)",Basilar Artery / Vertebrobasilar Junction,Moderate-High,Early repeat angiography (6-12 month MRA/CTA) and outpatient neurointerventional consult.
+#3,80.9%,4.49,Small (3-5mm),"(84.4, 55.7, 65.2)",Basilar Artery / Vertebrobasilar Junction,Moderate-High,Early repeat angiography (6-12 month MRA/CTA) and outpatient neurointerventional consult.
+#4,78.9%,4.99,Small (3-5mm),"(61.1, 56.5, 64.3)",Right Middle Cerebral Artery (MCA) Bifurcation,Moderate,Serial imaging at 6 to 12 months to monitor for morphological enlargement.

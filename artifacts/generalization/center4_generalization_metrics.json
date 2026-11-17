@@ -1,0 +1,83 @@
+{
+  "dataset": "TopAneu Center-4 Japan Holdout (CTA)",
+  "num_scans_evaluated": 8,
+  "total_ground_truth": 10,
+  "baseline": {
+    "mean_benchmark_sensitivity": 0.0,
+    "benchmarks": {
+      "0.5": 0.0,
+      "1.0": 0.0,
+      "2.0": 0.0,
+      "4.0": 0.0
+    },
+    "breakdown": {
+      "0.5": {
+        "overall": 0.0,
+        "very_small_under_3mm": 0.0,
+        "small_3_to_5mm": 0.0,
+        "overall_small_le_5mm": 0.0,
+        "medium_large_gt_5mm": 0.0
+      },
+      "1.0": {
+        "overall": 0.0,
+        "very_small_under_3mm": 0.0,
+        "small_3_to_5mm": 0.0,
+        "overall_small_le_5mm": 0.0,
+        "medium_large_gt_5mm": 0.0
+      },
+      "2.0": {
+        "overall": 0.0,
+        "very_small_under_3mm": 0.0,
+        "small_3_to_5mm": 0.0,
+        "overall_small_le_5mm": 0.0,
+        "medium_large_gt_5mm": 0.0
+      },
+      "4.0": {
+        "overall": 0.0,
+        "very_small_under_3mm": 0.0,
+        "small_3_to_5mm": 0.0,
+        "overall_small_le_5mm": 0.0,
+        "medium_large_gt_5mm": 0.0
+      }
+    }
+  },
+  "fusion": {
+    "mean_benchmark_sensitivity": 0.37081447963800906,
+    "benchmarks": {
+      "0.5": 0.09230769230769231,
+      "1.0": 0.2153846153846154,
+      "2.0": 0.4461538461538462,
+      "4.0": 0.7294117647058823
+    },
+    "breakdown": {
+      "0.5": {
+        "overall": 0.09230769230769231,
+        "very_small_under_3mm": 0.0,
+        "small_3_to_5mm": 0.09230769230769231,
+        "overall_small_le_5mm": 0.09230769230769231,
+        "medium_large_gt_5mm": 0.09230769230769231
+      },
+      "1.0": {
+        "overall": 0.2153846153846154,
+        "very_small_under_3mm": 0.0,
+        "small_3_to_5mm": 0.2153846153846154,
+        "overall_small_le_5mm": 0.2153846153846154,
+        "medium_large_gt_5mm": 0.2153846153846154
+      },
+      "2.0": {
+        "overall": 0.4461538461538462,
+        "very_small_under_3mm": 0.0,
+        "small_3_to_5mm": 0.46153846153846156,
+        "overall_small_le_5mm": 0.46153846153846156,
+        "medium_large_gt_5mm": 0.4307692307692308
+      },
+      "4.0": {
+        "overall": 0.7294117647058823,
+        "very_small_under_3mm": 0.0,
+        "small_3_to_5mm": 0.8588235294117648,
+        "overall_small_le_5mm": 0.8588235294117648,
+        "medium_large_gt_5mm": 0.6
+      }
+    }
+  }
+}

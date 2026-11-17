@@ -90,6 +90,31 @@ class MultimodalAneurysmDataset(Dataset):
         return item
 
 
+def create_modality_balanced_sampler(dataset: Union[AneurysmPatchDataset, MultimodalAneurysmDataset]) -> torch.utils.data.WeightedRandomSampler:
+    """
+    Constructs a 4-way balanced sampling strategy ensuring equal representation:
+    25% MRA Positive, 25% MRA Negative, 25% CTA Positive, 25% CTA Negative.
+    Completely eliminates modality bias toward MRA and equalizes positive/negative classes.
+    """
+    base = dataset.base_dataset if hasattr(dataset, "base_dataset") else dataset
+    if hasattr(base, "dataset"):  # Handle torch.utils.data.Subset
+        base = base.dataset
+    samples = getattr(base, "samples", [])
+
+    counts = {}
+    for s in samples:
+        key = (s.get("modality", "mr"), int(s.get("is_aneurysm", 0)))
+        counts[key] = counts.get(key, 0) + 1
+
+    weights = []
+    for s in samples:
+        key = (s.get("modality", "mr"), int(s.get("is_aneurysm", 0)))
+        weights.append(1.0 / max(1, counts[key]))
+
+    weights_tensor = torch.tensor(weights, dtype=torch.double)
+    return torch.utils.data.WeightedRandomSampler(weights_tensor, num_samples=len(weights), replacement=True)
+
+
 def multimodal_collate_fn(batch: List[dict]) -> dict:
     """
     Collates a list of multimodal samples into batched PyTorch tensors

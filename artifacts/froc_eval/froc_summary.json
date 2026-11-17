@@ -1,0 +1,99 @@
+{
+  "split_csv": "configs/val_split.csv",
+  "scans_evaluated": 8,
+  "total_ground_truth": 5,
+  "baseline": {
+    "mean_benchmark_sensitivity": 0.15636363636363634,
+    "benchmarks": {
+      "0.5": 0.05454545454545455,
+      "1.0": 0.1272727272727273,
+      "2.0": 0.2,
+      "3.0": 0.2,
+      "4.0": 0.2
+    },
+    "breakdown": {
+      "0.5": {
+        "overall": 0.05454545454545455,
+        "very_small_under_3mm": 0.0,
+        "small_3_to_5mm": 0.0,
+        "overall_small_le_5mm": 0.0,
+        "medium_large_gt_5mm": 0.06818181818181818
+      },
+      "1.0": {
+        "overall": 0.1272727272727273,
+        "very_small_under_3mm": 0.0,
+        "small_3_to_5mm": 0.0,
+        "overall_small_le_5mm": 0.0,
+        "medium_large_gt_5mm": 0.1590909090909091
+      },
+      "2.0": {
+        "overall": 0.2,
+        "very_small_under_3mm": 0.0,
+        "small_3_to_5mm": 0.0,
+        "overall_small_le_5mm": 0.0,
+        "medium_large_gt_5mm": 0.25
+      },
+      "3.0": {
+        "overall": 0.2,
+        "very_small_under_3mm": 0.0,
+        "small_3_to_5mm": 0.0,
+        "overall_small_le_5mm": 0.0,
+        "medium_large_gt_5mm": 0.25
+      },
+      "4.0": {
+        "overall": 0.2,
+        "very_small_under_3mm": 0.0,
+        "small_3_to_5mm": 0.0,
+        "overall_small_le_5mm": 0.0,
+        "medium_large_gt_5mm": 0.25
+      }
+    }
+  },
+  "fusion": {
+    "mean_benchmark_sensitivity": 0.08722222222222223,
+    "benchmarks": {
+      "0.5": 0.0,
+      "1.0": 0.0,
+      "2.0": 0.0,
+      "3.0": 0.125,
+      "4.0": 0.3111111111111111
+    },
+    "breakdown": {
+      "0.5": {
+        "overall": 0.0,
+        "very_small_under_3mm": 0.0,
+        "small_3_to_5mm": 0.0,
+        "overall_small_le_5mm": 0.0,
+        "medium_large_gt_5mm": 0.0
+      },
+      "1.0": {
+        "overall": 0.0,
+        "very_small_under_3mm": 0.0,
+        "small_3_to_5mm": 0.0,
+        "overall_small_le_5mm": 0.0,
+        "medium_large_gt_5mm": 0.0
+      },
+      "2.0": {
+        "overall": 0.0,
+        "very_small_under_3mm": 0.0,
+        "small_3_to_5mm": 0.0,
+        "overall_small_le_5mm": 0.0,
+        "medium_large_gt_5mm": 0.0
+      },
+      "3.0": {
+        "overall": 0.125,
+        "very_small_under_3mm": 0.0,
+        "small_3_to_5mm": 0.0,
+        "overall_small_le_5mm": 0.0,
+        "medium_large_gt_5mm": 0.15625
+      },
+      "4.0": {
+        "overall": 0.3111111111111111,
+        "very_small_under_3mm": 0.0,
+        "small_3_to_5mm": 0.0,
+        "overall_small_le_5mm": 0.0,
+        "medium_large_gt_5mm": 0.3888888888888889
+      }
+    }
+  }
+}

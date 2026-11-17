@@ -1,0 +1,3 @@
+ID,Confidence,Diameter (mm),Size Category,"Centroid (X,Y,Z mm)",Anatomical Location,Rupture Risk,Clinical Action
+#1,74.4%,11.55,Large (>7mm),"(56.7, 73.2, 33.2)",Right Middle Cerebral Artery (MCA) Bifurcation,Critical,Immediate neurovascular specialist referral. Substantial rupture hazard.
+#2,74.4%,11.22,Large (>7mm),"(85.2, 71.1, 30.9)",Basilar Artery / Vertebrobasilar Junction,Critical,Immediate neurovascular specialist referral. Substantial rupture hazard.

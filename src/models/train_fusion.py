@@ -18,7 +18,11 @@ from torch.utils.data import DataLoader, Subset
 from torch_geometric.data import Batch
 
 from src.data.dataset import AneurysmPatchDataset
-from src.data.multimodal_dataset import MultimodalAneurysmDataset, multimodal_collate_fn
+from src.data.multimodal_dataset import (
+    MultimodalAneurysmDataset,
+    multimodal_collate_fn,
+    create_modality_balanced_sampler,
+)
 from src.models.dual_branch_detector import DualBranchDetector
 from src.models.losses import MultiTaskDetectionLoss
 from src.models.trainer import (
@@ -157,18 +161,38 @@ def train_fusion(args: argparse.Namespace) -> Dict[str, float]:
     if args.max_val_samples:
         val_patch_ds = Subset(val_patch_ds, list(range(min(args.max_val_samples, len(val_patch_ds)))))
 
+    # Modality-specific filtering (for Dual-Expert MRA and CTA specialist training)
+    modality_filter = getattr(args, "modality", "all").lower()
+    if modality_filter in ["mr", "ct"]:
+        train_indices = [i for i, s in enumerate(train_patch_ds.samples) if s.get("modality", "").lower() == modality_filter]
+        val_indices = [i for i, s in enumerate(val_patch_ds.samples) if s.get("modality", "").lower() == modality_filter]
+        print(f"Filtering dataset to {modality_filter.upper()}-only: {len(train_indices)} train patches, {len(val_indices)} val patches.")
+        train_patch_ds = Subset(train_patch_ds, train_indices)
+        val_patch_ds = Subset(val_patch_ds, val_indices)
+
     # Wrap in MultimodalAneurysmDataset
     train_ds = MultimodalAneurysmDataset(train_patch_ds)
     val_ds = MultimodalAneurysmDataset(val_patch_ds)
 
-    train_loader = DataLoader(
-        train_ds,
-        batch_size=args.batch_size,
-        shuffle=True,
-        collate_fn=multimodal_collate_fn,
-        num_workers=0,  # Main process for Windows stability
-        pin_memory=(device.type == "cuda"),
-    )
+    if modality_filter == "all" and getattr(args, "balance_modalities", True):
+        train_sampler = create_modality_balanced_sampler(train_ds)
+        train_loader = DataLoader(
+            train_ds,
+            batch_size=args.batch_size,
+            sampler=train_sampler,
+            collate_fn=multimodal_collate_fn,
+            num_workers=0,  # Main process for Windows stability
+            pin_memory=(device.type == "cuda"),
+        )
+    else:
+        train_loader = DataLoader(
+            train_ds,
+            batch_size=args.batch_size,
+            shuffle=True,
+            collate_fn=multimodal_collate_fn,
+            num_workers=0,  # Main process for Windows stability
+            pin_memory=(device.type == "cuda"),
+        )
     val_loader = DataLoader(
         val_ds,
         batch_size=args.batch_size,
@@ -206,7 +230,24 @@ def train_fusion(args: argparse.Namespace) -> Dict[str, float]:
     scaler = torch.amp.GradScaler("cuda", enabled=use_amp)
 
     os.makedirs(args.checkpoint_dir, exist_ok=True)
-    history_path = os.path.join(args.checkpoint_dir, "fusion_train_history.json")
+    if getattr(args, "checkpoint_name", None):
+        best_ckpt_name = args.checkpoint_name
+        last_ckpt_name = f"last_{args.checkpoint_name}"
+    elif modality_filter == "mr":
+        best_ckpt_name = "best_fusion_mra.pt"
+        last_ckpt_name = "last_fusion_mra.pt"
+    elif modality_filter == "ct":
+        best_ckpt_name = "best_fusion_cta.pt"
+        last_ckpt_name = "last_fusion_cta.pt"
+    else:
+        best_ckpt_name = "best_fusion_model.pt"
+        last_ckpt_name = "last_fusion_model.pt"
+
+    best_ckpt_path = os.path.join(args.checkpoint_dir, best_ckpt_name)
+    last_ckpt_path = os.path.join(args.checkpoint_dir, last_ckpt_name)
+    history_filename = f"fusion_{modality_filter}_history.json" if modality_filter != "all" else "fusion_train_history.json"
+    history_path = os.path.join(args.checkpoint_dir, history_filename)
+
     best_auroc = -1.0
     best_metrics: Dict[str, float] = {}
     history: List[dict] = []
@@ -265,7 +306,6 @@ def train_fusion(args: argparse.Namespace) -> Dict[str, float]:
         )
 
         # Save last checkpoint
-        last_ckpt_path = os.path.join(args.checkpoint_dir, "last_fusion_model.pt")
         torch.save(
             {
                 "epoch": epoch,
@@ -283,7 +323,6 @@ def train_fusion(args: argparse.Namespace) -> Dict[str, float]:
             best_auroc = auroc_val
             best_metrics = val_stats
             stale = 0
-            best_ckpt_path = os.path.join(args.checkpoint_dir, "best_fusion_model.pt")
             torch.save(
                 {
                     "epoch": epoch,
@@ -328,6 +367,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--resume", default=None)
     parser.add_argument("--device", default="auto")
     parser.add_argument("--cache-patches", action="store_true", default=True)
+    parser.add_argument("--balance-modalities", action="store_true", default=True, help="Equalize 50% MRA / 50% CTA training sampling")
+    parser.add_argument("--modality", choices=["all", "mr", "ct"], default="all", help="Train on all data or modality-specific (mr or ct)")
+    parser.add_argument("--checkpoint-name", default=None, help="Custom filename for best checkpoint (e.g. best_fusion_mra.pt)")
     return parser.parse_args()
 
 
