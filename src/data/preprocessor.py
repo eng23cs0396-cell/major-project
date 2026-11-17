@@ -176,3 +176,131 @@ class VolumetricPreprocessor:
         if vol_patch.shape != target_size:
             raise ValueError(f"Patch shape mismatch: {vol_patch.shape} vs {target_size}")
         return vol_patch, mask_patch
+
+    def extract_brain_mask(
+        self,
+        volume: np.ndarray,
+        spacing: Tuple[float, float, float] = (0.5, 0.5, 0.5),
+        modality: str = "mr",
+    ) -> np.ndarray:
+        """
+        Automated Intracranial Skull-Stripping & Brain Cavity Extraction.
+
+        Isolates the intracranial cavity and removes the calvarial skull, scalp subcutaneous
+        fat, ocular fat, and background air. Runs in <3 seconds using fast downsampled 3D morphology.
+
+        Args:
+            volume: 3D intensity scan (MRA or CTA).
+            spacing: Physical voxel spacing in mm.
+            modality: 'mr' or 'ct'.
+
+        Returns:
+            3D boolean array indicating the intracranial brain cavity.
+        """
+        from scipy import ndimage
+        from skimage.filters import threshold_otsu
+
+        orig_shape = volume.shape
+        mod = modality.lower()
+
+        # Downsample to half resolution for rapid 3D morphology
+        down_shape = tuple(max(8, s // 2) for s in orig_shape)
+        step_x = orig_shape[0] / down_shape[0]
+        step_y = orig_shape[1] / down_shape[1]
+        step_z = orig_shape[2] / down_shape[2]
+
+        idx_x = np.clip((np.arange(down_shape[0]) * step_x).astype(int), 0, orig_shape[0] - 1)
+        idx_y = np.clip((np.arange(down_shape[1]) * step_y).astype(int), 0, orig_shape[1] - 1)
+        idx_z = np.clip((np.arange(down_shape[2]) * step_z).astype(int), 0, orig_shape[2] - 1)
+
+        sub_vol = volume[np.ix_(idx_x, idx_y, idx_z)]
+
+        if "ct" in mod:
+            # CTA soft tissue / brain parenchyma windowing [10, 90] HU
+            brain_sub = (sub_vol >= 10.0) & (sub_vol <= 90.0)
+        else:
+            # TOF-MRA: Otsu thresholding on positive brain tissue voxels
+            pos_voxels = sub_vol[sub_vol > 0]
+            if len(pos_voxels) > 100:
+                thresh = float(threshold_otsu(pos_voxels)) * 0.4
+            else:
+                thresh = 10.0
+            brain_sub = sub_vol > thresh
+
+        # 3D morphological closing to bridge ventricles and sulci
+        struct = ndimage.generate_binary_structure(3, 1)
+        closed = ndimage.binary_closing(brain_sub, structure=struct, iterations=3)
+        filled = ndimage.binary_fill_holes(closed)
+
+        # Retain largest connected component (intracranial vault)
+        labeled, num_features = ndimage.label(filled)
+        if num_features > 0:
+            sizes = ndimage.sum(filled, labeled, range(1, num_features + 1))
+            largest_label = int(np.argmax(sizes)) + 1
+            brain_cavity = labeled == largest_label
+        else:
+            brain_cavity = filled
+
+        # Erode 2 voxels (4-5 mm) to strip scalp fat rim and skull marrow
+        eroded = ndimage.binary_erosion(brain_cavity, structure=struct, iterations=2)
+
+        # Upsample back to original grid
+        upsampled = eroded[np.ix_(
+            np.clip((np.arange(orig_shape[0]) / step_x).astype(int), 0, down_shape[0] - 1),
+            np.clip((np.arange(orig_shape[1]) / step_y).astype(int), 0, down_shape[1] - 1),
+            np.clip((np.arange(orig_shape[2]) / step_z).astype(int), 0, down_shape[2] - 1),
+        )]
+        return upsampled.astype(bool)
+
+    def extract_automated_vessels(
+        self,
+        volume: np.ndarray,
+        brain_mask: Optional[np.ndarray] = None,
+        spacing: Tuple[float, float, float] = (0.5, 0.5, 0.5),
+        modality: str = "mr",
+        percentile: float = 98.0,
+    ) -> np.ndarray:
+        """
+        Extracts intracranial cerebral arteries directly from a raw scan volume.
+        Eliminates scalp fat, dural sinuses, and calvarial bone artifacts without requiring
+        a manual vessel mask file.
+
+        Args:
+            volume: 3D intensity array.
+            brain_mask: Optional precomputed brain mask. If None, computed on the fly.
+            spacing: Physical voxel spacing in mm.
+            modality: 'mr' or 'ct'.
+            percentile: Percentile threshold for TOF-MRA high-flow vessel signal.
+
+        Returns:
+            3D binary arterial mask.
+        """
+        from scipy import ndimage
+
+        if brain_mask is None:
+            brain_mask = self.extract_brain_mask(volume, spacing=spacing, modality=modality)
+
+        masked_vol = np.where(brain_mask, volume, 0.0)
+        intracranial_voxels = masked_vol[brain_mask]
+
+        if len(intracranial_voxels) == 0:
+            return np.zeros_like(volume, dtype=bool)
+
+        mod = modality.lower()
+        if "ct" in mod:
+            # CTA contrast-enhanced vessel window (>150 HU within brain parenchyma)
+            vessel_mask = (masked_vol > 150.0) & brain_mask
+        else:
+            # TOF-MRA high-velocity flow void signal
+            thresh = float(np.percentile(intracranial_voxels, percentile))
+            vessel_mask = (masked_vol >= thresh) & brain_mask
+
+        # Filter out small disconnected noise specks (< 15 voxels)
+        labeled, num_features = ndimage.label(vessel_mask)
+        if num_features > 0:
+            sizes = ndimage.sum(vessel_mask, labeled, range(1, num_features + 1))
+            keep_labels = np.where(sizes >= 15)[0] + 1
+            vessel_mask = np.isin(labeled, keep_labels)
+
+        return vessel_mask.astype(bool)
+

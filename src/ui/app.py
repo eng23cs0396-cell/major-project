@@ -141,10 +141,11 @@ def analyze_cerebral_scan(
         vessel_nii = nib.load(mask_path)
         vessel_arr = np.asarray(vessel_nii.dataobj, dtype=np.uint8) > 0
     else:
-        progress(0.2, desc="Extracting brain vessel mask via thresholding...")
-        # Fallback thresholding if mask is not provided
-        p98 = np.percentile(img_arr, 98.0)
-        vessel_arr = img_arr > p98
+        progress(0.2, desc="Executing Automated Intracranial Skull-Stripping & Artery Extraction...")
+        from src.data.preprocessor import VolumetricPreprocessor
+        prep = VolumetricPreprocessor()
+        brain_mask = prep.extract_brain_mask(img_arr, spacing=spacing, modality=final_modality)
+        vessel_arr = prep.extract_automated_vessels(img_arr, brain_mask=brain_mask, spacing=spacing, modality=final_modality)
 
     # 3. Configure Model Engine
     progress(0.3, desc=f"Initializing {model_choice} engine...")
@@ -264,7 +265,7 @@ def analyze_cerebral_scan(
     </div>
 </div>
 """
-    elif (actionable_count == 1 and max_conf < 0.80 and highest_risk not in ["Critical", "High", "Moderate-High"]):
+    elif (actionable_count == 1 and max_conf < 0.85 and highest_risk not in ["Critical", "High"]):
         verdict_badge = f"""
 <div style="background: #fffbeb; border: 2px solid #f59e0b; border-radius: 10px; padding: 16px 20px; margin-bottom: 16px;">
     <div style="display: flex; align-items: center; gap: 14px;">

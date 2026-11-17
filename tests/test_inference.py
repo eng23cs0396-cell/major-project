@@ -194,3 +194,27 @@ class TestScanDetectorEndToEnd:
             assert "aneurysm_prob" in dets[0]
             assert "diameter_mm" in dets[0]
 
+    def test_automated_mask_free_inference(self):
+        """Verifies mask-free inference works with automated intracranial extraction."""
+        vol = np.zeros((32, 32, 32), dtype=np.float32)
+        # Brain parenchyma + bright vessel
+        vol[8:24, 8:24, 8:24] = 100.0
+        vol[16, :, 16] = 500.0
+
+        detector = ScanDetector(
+            model_type="baseline",
+            device="cpu",
+            batch_size=4,
+            conf_threshold=0.0,
+        )
+
+        # Pass vessel_mask=None to trigger automated extraction
+        dets = detector.detect_scan(
+            image_volume=vol,
+            vessel_mask=None,
+            modality="mr",
+            spacing=(1.0, 1.0, 1.0),
+            scan_id="test_mask_free_scan",
+        )
+        assert isinstance(dets, list)
+

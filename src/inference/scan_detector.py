@@ -129,12 +129,13 @@ class ScanDetector:
         return self._loaded_models[target_ckpt]
 
     def _get_or_build_graph(self, scan_id: str, vessel_mask: np.ndarray, spacing: Tuple[float, float, float]) -> Data:
-        """Loads cached graph or constructs it on the fly."""
+        """Loads cached graph or constructs it on the fly with accurate physical spacing."""
         cache_path = os.path.join(self.graph_cache_dir, f"{scan_id}.pt")
         if os.path.exists(cache_path):
             return torch.load(cache_path, map_location="cpu", weights_only=False)
 
-        graph = self.graph_builder.build_graph_from_mask(vessel_mask)
+        builder = ArterialGraphBuilder(spacing=spacing)
+        graph = builder.build_graph_from_mask(vessel_mask)
         try:
             torch.save(graph, cache_path)
         except Exception:
@@ -145,17 +146,19 @@ class ScanDetector:
     def detect_scan(
         self,
         image_volume: np.ndarray,
-        vessel_mask: np.ndarray,
+        vessel_mask: Optional[np.ndarray] = None,
         modality: str = "mr",
         spacing: Tuple[float, float, float] = (0.5, 0.5, 0.5),
         scan_id: str = "scan_001",
     ) -> List[Dict]:
         """
         Runs the full detection pipeline on a single 3D volume.
+        If vessel_mask is None, automatically executes intracranial brain-masking
+        and artery extraction to eliminate scalp and fat artifacts.
 
         Args:
             image_volume: 3D intensity array (raw MRA or CTA).
-            vessel_mask: 3D binary vessel mask.
+            vessel_mask: 3D binary vessel mask (optional).
             modality: 'mr' or 'ct'.
             spacing: Voxel spacing in mm (dx, dy, dz).
             scan_id: Identifier string for caching.
@@ -164,6 +167,11 @@ class ScanDetector:
             List of detected aneurysms sorted by confidence after 3D-NMS.
         """
         spacing_arr = np.array(spacing, dtype=np.float32)
+
+        # 0. Automated Brain-Masking & Vessel Filter if no mask is provided
+        if vessel_mask is None or not np.any(vessel_mask > 0):
+            brain_mask = self.preprocessor.extract_brain_mask(image_volume, spacing=spacing, modality=modality)
+            vessel_mask = self.preprocessor.extract_automated_vessels(image_volume, brain_mask=brain_mask, spacing=spacing, modality=modality)
 
         # 1. Intensity Normalization
         norm_vol = self.preprocessor.normalize_intensity(image_volume, modality=modality)
@@ -205,8 +213,8 @@ class ScanDetector:
                 valid_batch_cands.append(cand)
 
                 if self.model_type == "fusion" and scan_graph is not None:
-                    # Extract k-hop local subgraph around candidate matching graph coordinate space (0.5mm isotropic)
-                    cand_graph_pos = np.array(cand["voxel_coord"], dtype=np.float32) * 0.5
+                    # Extract k-hop local subgraph around candidate using physical coordinate space
+                    cand_graph_pos = np.array(cand["phys_coord"], dtype=np.float32)
                     subg = self.subgraph_extractor.extract_subgraph_around_point(
                         scan_graph, cand_graph_pos, tree=scan_tree
                     )
@@ -239,11 +247,14 @@ class ScanDetector:
                 offset_k = offsets[k]
                 diam_k = float(diams[k])
 
-                # Trust neural network and topological GAT representations
-                # Downweight flat non-dilated centerlines only when network confidence is low
+                # Murray's Morphometric Saccular Caliber Outpouching Filter:
+                # Normal tapering branches / non-dilated bifurcation carrefours (bulge < 0.90)
+                # are mathematically cylindrical branching vessels, calibrated down.
                 bulge = float(cand.get("bulge_ratio", 1.0))
-                if cand.get("candidate_type") == "waypoint" and bulge < 1.02 and prob_k < 0.50:
-                    prob_k = prob_k * 0.90
+                if bulge < 0.90:
+                    prob_k = prob_k * 0.50
+                elif bulge < 1.15:
+                    prob_k = prob_k * (0.50 + 0.50 * (bulge - 0.90) / 0.25)
 
                 vx, vy, vz = cand["voxel_coord"]
                 ref_vx = float(vx + offset_k[0])
@@ -268,6 +279,16 @@ class ScanDetector:
                     "aneurysm_prob": prob_k,
                     "diameter_mm": diam_k,
                 })
+
+        # Multi-Candidate Spatial Density & Cluster Agreement
+        if len(raw_detections) > 1:
+            coords = np.array([d["refined_phys_coord"] for d in raw_detections], dtype=np.float32)
+            for i, det_i in enumerate(raw_detections):
+                dists = np.linalg.norm(coords - det_i["refined_phys_coord"], axis=1)
+                cluster_count = sum(1 for j, d in enumerate(dists) if d <= 6.0 and raw_detections[j]["aneurysm_prob"] >= 0.45)
+                det_i["cluster_density"] = cluster_count
+                if cluster_count == 1 and det_i["aneurysm_prob"] < 0.75:
+                    det_i["aneurysm_prob"] = det_i["aneurysm_prob"] * 0.85
 
         # 5. Apply 3D Non-Maximum Suppression
         final_detections = self.nms.suppress(

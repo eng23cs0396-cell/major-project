@@ -166,14 +166,22 @@ class CandidateProposer:
                 if np.min(dist) < req_dist:
                     continue
 
-            # Compute Murray's focal dilation (bulge ratio) relative to 4.0 mm local skeleton neighborhood
+            # Compute Murray's focal saccular outpouching ratio relative to supporting parent vessel
+            # Evaluates the surrounding vascular skeleton in a 2.5 mm to 7.0 mm ring
             bulge_ratio = 1.0
             if skel_tree is not None:
-                nbr_indices = skel_tree.query_ball_point(phys, r=4.0)
-                if len(nbr_indices) >= 3:
-                    nbr_radii = [float(edt_mm[tuple(skel_voxels[i])]) for i in nbr_indices]
-                    baseline_radius = float(np.percentile(nbr_radii, 25))
-                    bulge_ratio = float(radius / max(baseline_radius, 0.3))
+                nbrs_wide = skel_tree.query_ball_point(phys, r=7.0)
+                nbrs_close = skel_tree.query_ball_point(phys, r=2.5)
+                ring_indices = [idx for idx in nbrs_wide if idx not in nbrs_close]
+                if len(ring_indices) >= 3:
+                    ring_radii = [float(edt_mm[tuple(skel_voxels[i])]) for i in ring_indices]
+                    # Parent vessel caliber: 90th percentile of surrounding arterial network
+                    parent_radius = float(np.percentile(ring_radii, 90))
+                    bulge_ratio = float(radius / max(parent_radius, 0.40))
+                elif len(nbrs_wide) >= 3:
+                    nbr_radii = [float(edt_mm[tuple(skel_voxels[i])]) for i in nbrs_wide]
+                    baseline_radius = float(np.percentile(nbr_radii, 90))
+                    bulge_ratio = float(radius / max(baseline_radius, 0.40))
 
             accepted_phys_coords.append(phys)
             accepted_candidates.append({
