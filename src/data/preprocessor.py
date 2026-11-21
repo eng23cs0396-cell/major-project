@@ -259,6 +259,12 @@ class VolumetricPreprocessor:
         if brain_mask is None:
             brain_mask = self.extract_brain_mask(volume, spacing=spacing, modality=modality)
 
+        # Exclude extracranial cervical neck slices (Z <= 15mm) from intracranial artery extraction
+        min_z_vox = int(15.0 / max(0.1, spacing[2]))
+        if min_z_vox > 0 and min_z_vox < volume.shape[2]:
+            brain_mask = brain_mask.copy()
+            brain_mask[:, :, :min_z_vox] = False
+
         masked_vol = np.where(brain_mask, volume, 0.0)
         intracranial_voxels = masked_vol[brain_mask]
 

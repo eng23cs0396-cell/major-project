@@ -261,14 +261,14 @@ class ScanDetector:
                 offset_k = offsets[k]
                 diam_k = float(diams[k])
 
-                # Murray's Morphometric Saccular Caliber Outpouching Filter:
-                # Normal tapering branches / non-dilated bifurcation carrefours (bulge < 0.90)
-                # are mathematically cylindrical branching vessels, calibrated down.
+                # Murray's Morphometric Saccular Caliber Outpouching & Confluence Filter:
+                # Normal tapering branches, bifurcations, and vertebrobasilar confluences (bulge <= 1.02)
+                # are mathematically non-dilated tubular vessels without an aneurysm dome.
                 bulge = float(cand.get("bulge_ratio", 1.0))
-                if bulge < 0.90:
-                    prob_k = prob_k * 0.50
+                if bulge <= 1.02:
+                    prob_k = prob_k * 0.55
                 elif bulge < 1.15:
-                    prob_k = prob_k * (0.50 + 0.50 * (bulge - 0.90) / 0.25)
+                    prob_k = prob_k * (0.55 + 0.45 * (bulge - 1.02) / 0.13)
 
                 vx, vy, vz = cand["voxel_coord"]
                 ref_vx = float(vx + offset_k[0])
