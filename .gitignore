@@ -41,5 +41,7 @@ artifacts/patch_cache/
 artifacts/graph_cache/
 artifacts/scratch/
 artifacts/review_presentation_phases_2_to_4/
+artifacts/generalization_loco/
+configs/loco_*.csv
 patent/
 walkthrough.html
